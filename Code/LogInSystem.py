@@ -17,5 +17,11 @@ class LogInSystem:
 
         return False, False
 
-    def itsAdmin(self, id):
-        pass
+    def signUp(self,id , password, admin, fullName, age, email):
+
+        if admin == "y":
+            admin = True
+        else:
+            admin = False
+
+        self.__users.addUser(id , password, admin, fullName, age, email)

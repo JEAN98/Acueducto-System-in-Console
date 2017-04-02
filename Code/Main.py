@@ -37,7 +37,18 @@ def menuApp():
             print("\nCheck the ID and password or Sign up\n")
 
     elif option == 2:
-        pass
+        'Register system by ID and password'
+
+        id = input("Enter your ID:\n")
+        password = input("Enter you pasword:\n")
+        admin = input("You are Administrator(y/n):\n")
+        fullName = input("Enter your full name:\n")
+        age = input("Enter your age:\n")
+        email = input("Enter your email:\n")
+
+        logIn.signUp(id , password, admin, fullName, age, email)
+
+        print("Welcome {} to Aqueduct System Console\n".format(fullName))
 
     elif option == 3:
 
@@ -54,4 +65,3 @@ menu = Menu()
 logIn = LogInSystem()
 
 menuApp()
-
