@@ -1,6 +1,7 @@
 class Menu:
 
     def menuPrincipal(self):
+        'Print the main menu'
 
         print("*****Menu Principal*****")
 

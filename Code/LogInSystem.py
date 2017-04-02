@@ -1,6 +1,7 @@
 from Users import *
 
 class LogInSystem:
+    "System of log in and sign up"
 
     def __init__(self):
 
@@ -18,6 +19,8 @@ class LogInSystem:
         return False, False
 
     def signUp(self,id , password, admin, fullName, age, email):
+        """Create a user in the users.
+        You need identification, password, full name, age, email and know if he is an administrator."""
 
         if admin == "y":
             admin = True
