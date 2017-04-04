@@ -54,6 +54,6 @@ class Menu:
     def menuInspectores(self):
 
         print("********INSPECTOR MENU ********\n",
-              "1) Install Meter.\n",
-              "2) Realizar lectura.\n",
+              "1)Water meter installaion.\n",
+              "2)Make reads water meter.\n",
               "3) Exit.")

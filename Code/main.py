@@ -1,7 +1,7 @@
 from Menu import *
 from LogInSystem import *
 from InspectorWorks import *
-
+personID = ""
 def menuAdmin():
 
     menu.menuAdministradores()
@@ -49,8 +49,10 @@ def menuInspector():
 
 
     if option == "1":
-
-        print("option#1")
+       # ownerID = listSolicutedes
+        #Serch if is in the list
+        waterMeterCode = input("Enter the water meter ID: ")
+        amount = float(input("Enter the amount the water meter have: "))
 
 
     elif option == "2":
