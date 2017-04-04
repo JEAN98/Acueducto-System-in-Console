@@ -55,8 +55,10 @@ def menuInspector():
         amount = float(input("Enter the amount the water meter have: "))
 
 
-    elif option == "2":
 
+    elif option == "2":
+        waterMeterID = input("Enter the water meter ID: ")
+        cubicsMeter = float(input("Enter the get cubic meter: "))
         print("option#2")
 
 
