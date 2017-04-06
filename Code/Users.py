@@ -5,7 +5,7 @@ class Users:
     def __init__(self):
 
         self.__listUsers.append({"id": "1",
-                                 "administrator": True,
+                                 "administrator": False,
                                  "fullName": "Pedro Castellon",
                                  "age": 20,
                                  "email": "kma@pito.es",

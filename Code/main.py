@@ -1,12 +1,13 @@
-from Menu import *
-from LogInSystem import *
-from Colors import *
+from Code.Menu import Menu
+from Code.LogInSystem import LogInSystem
+from Code.Colors import Colors
 personID = ""
+
 
 class Main:
 
     def menuApp(self):
-        'Application main menu'
+        """Application main menu"""
 
         menu.menuPrincipal()
 
@@ -26,7 +27,7 @@ class Main:
 
                 menu.menuAdministradores()
 
-            elif log and admin != True:
+            elif log and not admin:
 
                 menu.menuInspectores()
 

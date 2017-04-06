@@ -1,4 +1,4 @@
-from Colors import *
+from Code.Colors import Colors
 
 class Menu:
 
