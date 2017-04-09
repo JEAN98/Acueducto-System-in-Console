@@ -12,20 +12,21 @@ class ReadsWaterMeter:
         plantillaFecha = "{}/{}/{}"
         self.fecha = plantillaFecha.format(now.day, now.month, now.year) #Get date time by sistem
         readsWaterMeterList.append(self)
-        print("Water meter added!!")
+        print("Read water meter added!!")
 
 
     def updateReadsWaterMeter(self,cubicMeters,waterMater,inspectorID):
         #Here can update reads
         for i in readsWaterMeterList:
             if i == self:
-                self.waterMeterID = waterMater.ID  # waterMeter is a object
-                self.inpesctorID = inspectorID
-                self.status = waterMater.status
-                self.cubicMeters = cubicMeters
+
+                i.waterMeterID = waterMater.ID  # waterMeter is a object
+                i.inpesctorID = inspectorID
+                i.status = waterMater.status
+                i.cubicMeters = cubicMeters
                 now = datetime.datetime.now()
                 plantillaFecha = "{}/{}/{}"
-                self.fecha = plantillaFecha.format(now.day, now.month, now.year)  # Get date time by sistem
+                i.fecha = plantillaFecha.format(now.day, now.month, now.year)  # Get date time by sistem
                 print("Successful actualization!!")
 
 
@@ -56,6 +57,5 @@ class ReadsWaterMeter:
 
     def deleteReadsWaterMeter(self):
         readsWaterMeterList.remove(self) #Here can delete the information the object in listReadsWaterMeters
-
         print("Successful elimination!!")
 

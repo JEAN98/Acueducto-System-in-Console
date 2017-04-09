@@ -3,7 +3,7 @@ from WaterMeter import *
 from ReadsWaterMeter import *
 requestList = [] #In this list we are going to save the request created by admin
  #in this list we are going to save the reads by inspectors
-
+inspectorID=""
 class Menu:
 
     def __init__(self):
@@ -106,7 +106,7 @@ class Menu:
         option = input("Select one option: ")
 
         if option == "1":
-
+            #Water meter installaion
             # Serch if is in the list
             waterMeterCode = input("Enter the water meter ID: ")
             amount = float(input("Enter the amount the water meter have: "))
@@ -116,14 +116,24 @@ class Menu:
 
 
         elif option == "2":
+            #Make reads water meter
+
             waterMeterID = input("Enter the water meter ID: ")
-            cubicsMeter = float(input("Enter the get cubic meter: "))
+            waterMeterObj = WaterMeter.searchWaterMaterList(waterMeterID)
+
+            if waterMeterObj == 0:
+                print(waterMeterID+" Does´not exist!!")
+                Menu.menuInspectores(None)
+            else:
+                cubicsMeter = float(input("Enter the get cubic meter: "))
+                ReadsWaterMeter(cubicsMeter,waterMeterObj,inspectorID)
 
 
         elif option == "3":
 
             return
 
-
         else:
             print("Invalid option")
+
+        Menu.menuInspectores(None)
