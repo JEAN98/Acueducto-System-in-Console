@@ -1,6 +1,5 @@
 import datetime
-listReadsWaterMeters = []
-
+readsWaterMeterList = []
 class ReadsWaterMeter:
 
     def __init__(self,cubicMeters,waterMater,inspectorID):
@@ -12,33 +11,51 @@ class ReadsWaterMeter:
         now = datetime.datetime.now()
         plantillaFecha = "{}/{}/{}"
         self.fecha = plantillaFecha.format(now.day, now.month, now.year) #Get date time by sistem
+        readsWaterMeterList.append(self)
+        print("Water meter added!!")
 
-        listReadsWaterMeters.append(self)   #Save the readsWater meters in listReadsWaterMeters
 
-    def updateReadsWaterMeter(self,cubicMeters,waterMater,inspectorID,position):
+    def updateReadsWaterMeter(self,cubicMeters,waterMater,inspectorID):
         #Here can update reads
+        for i in readsWaterMeterList:
+            if i == self:
+                self.waterMeterID = waterMater.ID  # waterMeter is a object
+                self.inpesctorID = inspectorID
+                self.status = waterMater.status
+                self.cubicMeters = cubicMeters
+                now = datetime.datetime.now()
+                plantillaFecha = "{}/{}/{}"
+                self.fecha = plantillaFecha.format(now.day, now.month, now.year)  # Get date time by sistem
+                print("Successful actualization!!")
 
-        self.waterMeterID = waterMater.ID  # waterMeter is a object
-        self.inpesctorID = inspectorID
-        self.status = waterMater.status
-        self.cubicMeters = cubicMeters
-        now = datetime.datetime.now()
-        plantillaFecha = "{}/{}/{}"
-        self.fecha = plantillaFecha.format(now.day, now.month, now.year)  # Get date time by sistem
 
-        listReadsWaterMeters.pop(position) #Delete the old object
+    def printReadWaterMeter(self):
+        #Here we can print a readWaterMeter
 
-        listReadsWaterMeters.append(self) #Save the new object with Updates
+        print("***ReadWaterMeter ID: "+ str(self.waterMeterID)+"***"+"\n"+
+              "InspectorID: "+str(self.inpesctorID) +"\n")
+        if self.status == False:
+            print("Status: Pending payment")
+        else:
+            print("Status: Ready payment")
+
+        print("CubicMeters: "+str(self.cubicMeters))
+        print("DateTime: "+str(self.fecha))
+
+    def printAllReadWaterMeter(self):
+        #Here we can print all readsWaterMeter
+        for read in readsWaterMeterList:
+            ReadsWaterMeter.printReadWaterMeter(read)   #Call method in same class that can to print little by little
 
     def searchReadWaterMeter(self,ID):
-        for i in listReadsWaterMeters:
-            if ID == i.waterMeterID:
+       for i in readsWaterMeterList:
+           if ID == i.waterMeterID:
                 return i
-        return False
+       return 0   #If this method can to return 0 is because does´not exist
 
-    def deleteReadsWaterMeter(self,position):
-        listReadsWaterMeters.pop(position) #Here can delete the information the object in listReadsWaterMeters
-        del self       #Here can delete the object
 
-    def getListReadsWater(self):
-        return listReadsWaterMeters
+    def deleteReadsWaterMeter(self):
+        readsWaterMeterList.remove(self) #Here can delete the information the object in listReadsWaterMeters
+
+        print("Successful elimination!!")
+

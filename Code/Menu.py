@@ -1,4 +1,8 @@
 from Code.Colors import Colors
+from WaterMeter import *
+from ReadsWaterMeter import *
+requestList = [] #In this list we are going to save the request created by admin
+ #in this list we are going to save the reads by inspectors
 
 class Menu:
 
@@ -102,17 +106,18 @@ class Menu:
         option = input("Select one option: ")
 
         if option == "1":
-            # ownerID = listSolicutedes
+
             # Serch if is in the list
             waterMeterCode = input("Enter the water meter ID: ")
             amount = float(input("Enter the amount the water meter have: "))
+            newWaterMeter = WaterMeter(requestList,waterMeterCode,amount)
+
 
 
 
         elif option == "2":
             waterMeterID = input("Enter the water meter ID: ")
             cubicsMeter = float(input("Enter the get cubic meter: "))
-            print("option#2")
 
 
         elif option == "3":

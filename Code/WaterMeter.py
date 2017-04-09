@@ -1,34 +1,42 @@
 # Class for waterMeter
-listWaterMeters = []
+waterMeterList=[]
 class WaterMeter:
 
-       def __init__(self, listRequest ,waterMeterID, amount):
+       def __init__(self, requestList ,waterMeterID, amount):
 
-           for i in listRequest:
+           for i in requestList:
 
                self.waterMeterID = waterMeterID
-               self.OwnerID = i.ID
+               self.OwnerID = i.OwnerID #Get in requestList
                self.status = False  # All water meters starts in False status    False = Pending and True =  Pay Ready
                self.amount = amount
+               waterMeterList.append(self)
 
-               listWaterMeters.append(self)  #Save the objects on Global list
+       def printWaterMeter(self):
+           #Here we can to print object that exist in list
+           print("***Water meter: "+ str(self.waterMeterID)+"***")
+           print("OwnerID: "+str(self.OwnerID))
+           if self.status == False:
+               print("Status: Pending payment")
+           else:
+               print("Status: Ready payment")
+
+           print("Amount in the waterMeter: "+str(self.amount))
+
 
 
        def searchWaterMaterList(self,ID):
-           for i in listWaterMeters:
+          for i in waterMeterList:
                if ID == i.waterMeterID:
-                   return i
+                 return i
 
-           return False
+          return 0  ##If this method can to return 0 is because does´not exist
 
-       def getListWaterMeters(self):
-           return listWaterMeters  #Return the list that have water meters objects
+       def updateStatus(self,ID):
+            for i in waterMeterList:
+                if ID == i.waterMeterID:
+                  i.status = True  # Here can update the status , if the user pay for his water (False = Pending and True =  Pay Ready)
+                  print("Successful actualization!!")
+                  return
 
 
-       def updateStatus(self,ID,position):
-           for i in listWaterMeters:
-               if ID == i.waterMeterID:
-                   self.status = True  # Here can update the status , if the user pay for his water (False = Pending and True =  Pay Ready)
-                   listWaterMeters[position].status = True #Update status in listWaterMeters
-                   return True
-           return False
