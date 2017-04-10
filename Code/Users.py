@@ -1,15 +1,13 @@
+from User import *
+
 class Users:
 
     __listUsers = []
 
     def __init__(self):
 
-        self.__listUsers.append({"id": "1",
-                                 "administrator": False,
-                                 "fullName": "Pedro Castellon",
-                                 "age": 20,
-                                 "email": "kma@pito.es",
-                                 "password": "a"})
+        self.__listUsers.append(User('1' , 'a', True, 'Pedro Castellon', 20, 'kma@pito.es'))
+        self.__listUsers.append(User('2' , 'a', False, 'Juan Caballom', 30, 'kma@pito.es'))
 
     def getList(self):
         'Return the list of users'
@@ -22,9 +20,5 @@ class Users:
         """Add a user in the list users.
         You need identification, password, full name, age, email and know if he is an administrator."""
 
-        self.__listUsers.append({"id": id,
-                                 "password": password,
-                                 "administrator": admin,
-                                 "fullName": fullName,
-                                 "age": age,
-                                 "email": email})
+        user = User(id , password, admin, fullName, age, email)
+        self.__listUsers.append(user)
