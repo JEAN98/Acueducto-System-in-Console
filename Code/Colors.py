@@ -7,14 +7,14 @@ class Colors:
     __orange = '\033[33m'
     __purple = '\033[35m'
 
-    def white(self):
+    def getWhite(self):
         return self.__white
 
-    def blue(self):
+    def getBlue(self):
         return self.__blue
 
-    def green(self):
+    def getGreen(self):
         return self.__green
 
-    def red(self):
+    def getRed(self):
         return self.__red

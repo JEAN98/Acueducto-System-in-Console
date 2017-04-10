@@ -34,8 +34,8 @@ def menuApp():
 
         else:
 
-            print("\n{}Check the ID and password or Sign up{}\n".format(colors.red(),
-                                                                        colors.white()))
+            print("\n{}Check the ID and password or Sign up{}\n".format(colors.getRed(),
+                                                                        colors.getWhite()))
 
     elif option == "2":
         'Register system by ID and password'
@@ -49,8 +49,8 @@ def menuApp():
 
         logIn.signUp(id, password, admin, fullName, age, email)
 
-        print("{0}\nWelcome {2} to Aqueduct System Console{1}\n".format(colors.green(),
-                                                                        colors.white(),
+        print("{0}\nWelcome {2} to Aqueduct System Console{1}\n".format(colors.getGreen(),
+                                                                        colors.getWhite(),
                                                                         fullName))
 
     elif option == "3":
@@ -60,8 +60,8 @@ def menuApp():
 
     else:
 
-        print("{}The option is incorrect{}\n".format(colors.red(),
-                                                     colors.white()))
+        print("{}The option is incorrect{}\n".format(colors.getRed(),
+                                                     colors.getWhite()))
 
     menuApp()
 

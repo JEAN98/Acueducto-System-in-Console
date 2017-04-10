@@ -13,7 +13,7 @@ class Menu:
     def menuPrincipal(self):
         'Print the main menu'
 
-        print("{}*****Menu Principal*****{}".format(self.__colors.blue(), self.__colors.white()))
+        print("{}*****Menu Principal*****{}".format(self.__colors.getBlue(), self.__colors.getWhite()))
 
         print("    1) Log In\n"
               "    2) Sign Up\n"
@@ -21,7 +21,7 @@ class Menu:
 
     def menuAdministradores(self):
 
-        print("{}********ADMINISTRATOR MENU********{}\n".format(self.__colors.blue(), self.__colors.white()),
+        print("{}********ADMINISTRATOR MENU********{}\n".format(self.__colors.getBlue(), self.__colors.getWhite()),
               "1) Subscribers.\n",
               "2) Measuring.\n",
               "3) Billing.\n",
