@@ -12,9 +12,9 @@ class LogInSystem:
 
         for user in self.__users.getList():
 
-            if user.id == id and user.password == password:
+            if user.getId() == id and user.getPassword() == password:
 
-                return True, user.administartor
+                return True, user.getAdministator()
 
         return False, False
 
