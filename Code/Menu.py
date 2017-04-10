@@ -10,7 +10,7 @@ class Menu:
 
         self.__colors = Colors()
 
-    def menuPrincipal(self):
+    def __menuPrincipal(self):
         'Print the main menu'
 
         print("{}*****Menu Principal*****{}".format(self.__colors.getBlue(), self.__colors.getWhite()))
@@ -19,7 +19,7 @@ class Menu:
               "    2) Sign Up\n"
               "    3) Exit")
 
-    def menuAdministradores(self):
+    def __menuAdministradores(self):
 
         print("{}********ADMINISTRATOR MENU********{}\n".format(self.__colors.getBlue(), self.__colors.getWhite()),
               "1) Subscribers.\n",
@@ -64,7 +64,7 @@ class Menu:
 
             print("The option is incorrect\n")
 
-    def menuAbonados(self):
+    def __menuAbonados(self):
 
         print("********SUBSCRIBERS MENU ********\n",
               "1) Create Subscriber.\n",
@@ -96,7 +96,7 @@ class Menu:
         else:
             print("Invalid option")
 
-    def menuInspectores(self):
+    def __menuInspectores(self):
 
         print("********INSPECTOR MENU ********\n",
               "1)Water meter installaion.\n",
@@ -137,3 +137,20 @@ class Menu:
             print("Invalid option")
 
         Menu.menuInspectores(None)
+
+    def getMenuPrincipal(self):
+        'Print the main menu'
+
+        self.__menuPrincipal()
+
+    def getMenuAdministradores(self):
+
+        self.__menuAdministradores()
+
+    def getMenuAbonados(self):
+
+        self.__menuAbonados()
+
+    def getMenuInspectors(self):
+
+        self.__menuInspectores()

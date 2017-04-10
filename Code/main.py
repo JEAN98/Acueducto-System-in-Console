@@ -10,7 +10,7 @@ colors = Colors()
 def menuApp():
     """Application main menu"""
 
-    menu.menuPrincipal()
+    menu.getMenuPrincipal()
 
     option = input("Enter an option: ")
 
@@ -26,11 +26,11 @@ def menuApp():
 
         if log and admin:
 
-            menu.menuAdministradores()
+            menu.getMenuAdministradores()
 
         elif log and not admin:
 
-            menu.menuInspectores()
+            menu.getMenuInspectors()
 
         else:
 
