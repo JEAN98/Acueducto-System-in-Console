@@ -14,16 +14,36 @@ class Subscriber:
 
 
     def getFullname(self):
-        """Gets the property: ID"""
+        """Gets the property: Fullname"""
 
         return self.__fullname
 
     def getAddres(self):
-        """Gets the property: ID"""
+        """Gets the property: Addres"""
 
         return self.__address
 
     def getTelephone(self):
-        """Gets the property: ID"""
+        """Gets the property: Telephone"""
 
         return self.__telephone
+
+    def setId(self, id):
+        """Sets the property: ID"""
+
+        self.__id = id
+
+    def setFullname(self, fullname):
+        """Sets the property: Fullname"""
+
+        self.__fullname = fullname
+
+    def setAddres(self, addres):
+        """Sets the property: Addres"""
+
+        self.__address = addres
+
+    def setTelephone(self, telephone):
+        """Sets the property: Telephone"""
+
+        self.__telephone = telephone

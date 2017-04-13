@@ -8,6 +8,7 @@ inspectorID=""
 class Menu:
 
     def __init__(self):
+        from Menu import Menu
 
         self.__colors = Colors()
         self.__subscribers  = Subscribers()
@@ -78,10 +79,10 @@ class Menu:
 
         if option == "1":
 
-            id = int(input("Enter your ID:\n"))
-            fullName = input("Enter your full name:\n")
-            addres = input("Enter your addres:\n")
-            telephone = input("Enter your telephone:\n")
+            id = int(input("Enter the ID of subscriber:\n"))
+            fullName = input("Enter the full name of subscriber:\n")
+            addres = input("Enter the addres of subscriber:\n")
+            telephone = input("Enter the telephone of subscriber:\n")
 
             self.__subscribers.addSubscribers(id, fullName, addres, telephone)
 
@@ -91,8 +92,18 @@ class Menu:
 
         elif option == "2":
 
-            print("option#2")
+            oldId = int(input("Enter the old ID of subscriber:\n"))
 
+            id = int(input("Enter the new ID of subscriber:\n"))
+            fullName = input("Enter the full name of subscriber:\n")
+            addres = input("Enter the addres of subscriber:\n")
+            telephone = input("Enter the telephone of subscriber:\n")
+
+            self.__subscribers.modifySubscribers(oldId, id, fullName, addres, telephone)
+
+            print("{0}\nWas successfully modified to{2}{1}\n".format(self.__colors.getGreen(),
+                                                                  self.__colors.getWhite(),
+                                                                  fullName))
 
         elif option == "3":
 
@@ -138,7 +149,7 @@ class Menu:
             waterMeterObj = WaterMeter.searchWaterMaterList(waterMeterID)
 
             if waterMeterObj == 0:
-                print(waterMeterID+" Does´not exist!!")
+                print(waterMeterID+" Does not exist!!")
                 Menu.menuInspectores(None)
             else:
                 cubicsMeter = float(input("Enter the get cubic meter: "))

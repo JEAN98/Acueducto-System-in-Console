@@ -30,7 +30,7 @@ class WaterMeter:
                if ID == i.waterMeterID:
                  return i
 
-          return 0  ##If this method can to return 0 is because does´not exist
+          return 0  ##If this method can to return 0 is because does not exist
 
        def updateStatus(self,ID):
             for i in waterMeterList:

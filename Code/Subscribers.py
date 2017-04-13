@@ -1,4 +1,4 @@
-from Code.Colors import *
+from Code.Colors import Colors
 from Code.Subscriber import Subscriber
 
 class Subscribers:
@@ -23,6 +23,24 @@ class Subscribers:
         You need identification, full name, addres, telephone."""
 
         self.__listSubscribers.append(Subscriber(id, fullName, addres, telephone))
+
+
+    def modifySubscribers(self, oldId, id , fullName, addres, telephone):
+        """Modify a user in the list subscribers.
+        You need old, identification, full name, addres, telephone."""
+
+        i = 0
+        while i < len(self.__listSubscribers):
+
+            if oldId == self.__listSubscribers[i].getId():
+
+                self.__listSubscribers[i].setId(id)
+                self.__listSubscribers[i].setFullname(fullName)
+                self.__listSubscribers[i].setAddres(addres)
+                self.__listSubscribers[i].setTelephone(telephone)
+
+            i += 1
+
 
     def sortedList(self):
         'Sort the list subscribers'

@@ -52,7 +52,7 @@ class ReadsWaterMeter:
        for i in readsWaterMeterList:
            if ID == i.waterMeterID:
                 return i
-       return 0   #If this method can to return 0 is because does´not exist
+       return 0   #If this method can to return 0 is because does not exist
 
 
     def deleteReadsWaterMeter(self):
