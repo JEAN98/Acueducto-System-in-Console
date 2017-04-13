@@ -1,6 +1,6 @@
-from Menu import *
-from LogInSystem import *
-from Colors import *
+from Code.Menu import Menu
+from Code.LogInSystem import LogInSystem
+from Code.Colors import Colors
 personID = ""
 
 menu = Menu()

@@ -1,6 +1,7 @@
 from Code.Colors import Colors
-from WaterMeter import *
-from ReadsWaterMeter import *
+from Code.WaterMeter import WaterMeter
+from Code.Subscribers import Subscribers
+from Code.ReadsWaterMeter import ReadsWaterMeter
 requestList = [] #In this list we are going to save the request created by admin
  #in this list we are going to save the reads by inspectors
 inspectorID=""
@@ -9,7 +10,7 @@ class Menu:
     def __init__(self):
 
         self.__colors = Colors()
-
+        self.__subscribers  = Subscribers()
     def __menuPrincipal(self):
         'Print the main menu'
 
@@ -33,8 +34,7 @@ class Menu:
 
         if option == "1":
 
-            print("option#1")
-
+            self.__menuSubscriber()
 
         elif option == "2":
 
@@ -64,13 +64,14 @@ class Menu:
 
             print("The option is incorrect\n")
 
-    def __menuAbonados(self):
+    def __menuSubscriber(self):
 
-        print("********SUBSCRIBERS MENU ********\n",
+        print("{}********SUBSCRIBERS MENU ********{}\n".format(self.__colors.getBlue(), self.__colors.getWhite()),
               "1) Create Subscriber.\n",
               "2) Modify Subscriber.\n",
               "3) Delete Subscriber.\n",
-              "4) Exit.")
+              "4) View All Subscribers.\n "
+              "5) Exit.")
         option = input("Select one option: ")
 
         if option == "1":
@@ -87,14 +88,19 @@ class Menu:
 
             print("option#3")
 
-
         elif option == "4":
+
+            self.__subscribers.sortedList()
+            self.__subscribers.printList()
+
+        elif option == "5":
 
             return
 
-
         else:
             print("Invalid option")
+
+        self.getMenuSubscriber()
 
     def __menuInspectores(self):
 
@@ -147,9 +153,9 @@ class Menu:
 
         self.__menuAdministradores()
 
-    def getMenuAbonados(self):
+    def getMenuSubscriber(self):
 
-        self.__menuAbonados()
+        self.__menuSubscriber()
 
     def getMenuInspectors(self):
 

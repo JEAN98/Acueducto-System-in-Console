@@ -15,6 +15,7 @@ class LogInSystem:
             if user.getId() == id and user.getPassword() == password:
 
                 return True, user.getAdministator()
+                self.__sesion = user # Sin uso
 
         return False, False
 
