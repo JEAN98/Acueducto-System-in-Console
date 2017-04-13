@@ -22,7 +22,7 @@ class Subscribers:
         """Add a user in the list subscribers.
         You need identification, full name, addres, telephone."""
 
-        self.__listSubscribers.append(Subscriber(id, fullname, addres, telephone))
+        self.__listSubscribers.append(Subscriber(id, fullName, addres, telephone))
 
     def sortedList(self):
         'Sort the list subscribers'

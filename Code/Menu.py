@@ -64,6 +64,8 @@ class Menu:
 
             print("The option is incorrect\n")
 
+        self.getMenuAdministradores()
+
     def __menuSubscriber(self):
 
         print("{}********SUBSCRIBERS MENU ********{}\n".format(self.__colors.getBlue(), self.__colors.getWhite()),
@@ -76,8 +78,16 @@ class Menu:
 
         if option == "1":
 
-            print("option#1")
+            id = int(input("Enter your ID:\n"))
+            fullName = input("Enter your full name:\n")
+            addres = input("Enter your addres:\n")
+            telephone = input("Enter your telephone:\n")
 
+            self.__subscribers.addSubscribers(id, fullName, addres, telephone)
+
+            print("{0}\nWas successfully added to{2}{1}\n".format(self.__colors.getGreen(),
+                                                               self.__colors.getWhite(),
+                                                               fullName))
 
         elif option == "2":
 
