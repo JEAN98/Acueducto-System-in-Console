@@ -1,6 +1,7 @@
 from Code.Menu import Menu
 from Code.LogInSystem import LogInSystem
 from Code.Colors import Colors
+
 personID = ""
 
 menu = Menu()
@@ -22,13 +23,16 @@ def menuApp():
         id = input("Enter your ID:\n")
         password = input("Enter you pasword:\n")
 
-        log, admin = logIn.logIn(id, password)
+        logIn.logIn(id, password)
 
-        if log and admin:
+        state = logIn.getState()
+        admin = logIn.getUser().getAdministrator()
+
+        if state and admin:
 
             menu.getMenuAdministradores()
 
-        elif log and not admin:
+        elif state and not admin:
 
             menu.getMenuInspectors()
 

@@ -2,9 +2,11 @@ from Code.Colors import Colors
 from Code.WaterMeter import WaterMeter
 from Code.Subscribers import Subscribers
 from Code.ReadsWaterMeter import ReadsWaterMeter
+
 requestList = [] #In this list we are going to save the request created by admin
  #in this list we are going to save the reads by inspectors
 inspectorID=""
+
 class Menu:
 
     def __init__(self):

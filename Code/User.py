@@ -19,7 +19,22 @@ class User:
 
         return self.__password
 
-    def getAdministator(self):
+    def getAdministrator(self):
         """Gets the property: Administrator"""
 
         return self.__administartor
+
+    def getFullName(self):
+        """Gets the property: Full name"""
+
+        return self.__fullname
+
+    def getage(self):
+        """Gets the property: age"""
+
+        return self.__age
+
+    def getEmail(self):
+        """Gets the property: email"""
+
+        return self.__email
