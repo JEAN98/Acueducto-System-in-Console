@@ -81,7 +81,7 @@ class ReadsWaterMeter:
             return "No outstanding invoice!"
 
     def payWaterMer(self, waterMeterID):
-
+        #In this method the admin can to make payments
         for i in readsWaterMeterList:
             if waterMeterID == i.waterMeterID:
                 if i.status == False:
