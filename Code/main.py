@@ -149,9 +149,7 @@ def __menuInspectors():
         # Serch if is in the list
         waterMeterCode = input("Enter the water meter ID: ")
         amount = float(input("Enter the amount the water meter have: "))
-        newWaterMeter = WaterMeter(requestList,waterMeterCode,amount)
-
-
+        WaterMeter(requestList,waterMeterCode,amount)
 
 
     elif option == "2":
