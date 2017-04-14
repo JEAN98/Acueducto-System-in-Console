@@ -18,3 +18,6 @@ class Colors:
 
     def getRed(self):
         return self.__red
+
+    def getOrange(self):
+        return self.__orange

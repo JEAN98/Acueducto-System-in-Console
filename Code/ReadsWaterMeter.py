@@ -48,9 +48,9 @@ class ReadsWaterMeter:
         for read in readsWaterMeterList:
             ReadsWaterMeter.printReadWaterMeter(read)   #Call method in same class that can to print little by little
 
-    def searchReadWaterMeter(self,ID):
+    def searchReadWaterMeter(self, id):
        for i in readsWaterMeterList:
-           if ID == i.waterMeterID:
+           if id == i.waterMeterID:
                 return i
        return 0   #If this method can to return 0 is because does not exist
 
