@@ -1,4 +1,4 @@
-from User import *
+from Code.User import User
 
 class Users:
 
