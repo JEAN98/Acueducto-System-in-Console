@@ -1,4 +1,5 @@
 import datetime
+from Code.WaterMeter import WaterMeter
 readsWaterMeterList = []
 class ReadsWaterMeter:
 
@@ -6,8 +7,7 @@ class ReadsWaterMeter:
 
         self.waterMeterID = waterMater.ID   #waterMeter is a object
         self.inpesctorID = inspectorID
-        self.status = waterMater.status
-        self.amountPreviousCubicMeters= waterMater.cubicMeters
+        self.status = False #False = Pending and True =  Pay Ready
         self.cubicMeters = cubicMeters
         now = datetime.datetime.now()
         plantillaFecha = "{}/{}/{}"
@@ -16,13 +16,11 @@ class ReadsWaterMeter:
         print("Read water meter added!!")
 
 
-    def updateReadsWaterMeter(self,cubicMeters,waterMater,inspectorID):
+    def updateReadsWaterMeter(self,cubicMeters):
         #Here can update reads
         for i in readsWaterMeterList:
             if i == self:
-                i.waterMeterID = waterMater.ID  # waterMeter is a object
-                i.inpesctorID = inspectorID
-                i.status = waterMater.status
+
                 i.cubicMeters = cubicMeters
                 now = datetime.datetime.now()
                 plantillaFecha = "{}/{}/{}"
@@ -45,19 +43,33 @@ class ReadsWaterMeter:
 
     def printAllReadWaterMeter(self):
         #Here we can print all readsWaterMeter
-        for read in readsWaterMeterList:
-            ReadsWaterMeter.printReadWaterMeter(read)   #Call method in same class that can to print little by little
 
-    def searchReadWaterMeter(self, id):
+        for reading in readsWaterMeterList:
+            ReadsWaterMeter.printReadWaterMeter(reading)   #Call method in same class that can to print little by little
+
+
+    def printReadingWaterMeter(self,waterMeterID):
+        # Here we can print a readingWaterMeter
+
+        for reading in readsWaterMeterList:
+            if reading.waterMeterID == waterMeterID:
+                ReadsWaterMeter.printReadWaterMeter(reading) # Call method in same class that can to print
+
+
+    def searchReadWaterMeter(self, waterMeterID):
+        #In this method can search a reading of any water meter
+
        for i in readsWaterMeterList:
-           if id == i.waterMeterID:
+           if waterMeterID == i.waterMeterID:
                 return i
        return 0   #If this method can to return 0 is because does not exist
 
 
 
     def deleteReadsWaterMeter(self):
-        readsWaterMeterList.remove(self) #Here can delete the information the object in listReadsWaterMeters
+        # Here can delete the information the reading in listReadsWaterMeters
+
+        readsWaterMeterList.remove(self)
         print("Successful elimination!!")
 
     def searchPendingInvoicesByClient(self, ownerID):

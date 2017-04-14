@@ -2,7 +2,7 @@
 waterMeterList=[]
 class WaterMeter:
 
-       def __init__(self, requestList ,waterMeterID, amount):
+       def __init__(self, requestList ,waterMeterID, amount, oldAmount):
 
            for i in requestList:
 
@@ -10,7 +10,7 @@ class WaterMeter:
                self.OwnerID = i.OwnerID #Get in requestList
                self.status = False  # All water meters starts in False status    False = Pending and True =  Pay Ready
                self.amount = amount
-               self.amountPreviousCubicMeters = amount
+               self.amountPreviousCubicMeters = oldAmount
                waterMeterList.append(self)
 
        def printWaterMeter(self):
@@ -34,6 +34,7 @@ class WaterMeter:
 
           return 0  ##If this method can to return 0 is because does not exist
 
+
        def updateStatus(self,ID,newAmount):
             for i in waterMeterList:
                 if ID == i.waterMeterID:
@@ -41,5 +42,4 @@ class WaterMeter:
                   i.amountPrevious = i.amount # Amount previous, let us to find out how to person should pay for his or her water
                   print("Successful actualization!!")
                   return
-
 
