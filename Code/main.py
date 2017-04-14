@@ -156,7 +156,7 @@ def __menuInspectors():
         #Make reads water meter
 
         waterMeterID = input("Enter the water meter ID: ")
-        waterMeterObj = WaterMeter.searchWaterMaterList()
+        waterMeterObj = WaterMeter.searchWaterMaterList(None,waterMeterID)
 
         if waterMeterObj == 0:
             print(waterMeterID+" Does not exist!!")
