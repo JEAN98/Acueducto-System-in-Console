@@ -55,8 +55,8 @@
       <file leaf-file-name="Users.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Code/Users.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="102">
+              <caret line="6" column="23" lean-forward="true" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -89,6 +89,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="Jean Carlo &lt;jean98vb@hotmail.com&gt;" />
         <option value="Jean Carlo &lt;jeancarlovegabejarano@hotmail.com&gt;" />
       </list>
     </option>
@@ -421,7 +422,14 @@
       <option name="project" value="LOCAL" />
       <updated>1492208562810</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Called of object User">
+      <created>1492209412095</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1492209412095</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -454,7 +462,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Explanation of code" />
     <MESSAGE value="Objects added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Objects added" />
+    <MESSAGE value="Called of object User" />
+    <option name="LAST_COMMIT_MESSAGE" value="Called of object User" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -651,6 +660,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Code/Subscriber.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -658,14 +675,6 @@
           <folding>
             <element signature="e#1591#4309#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/Subscriber.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -679,8 +688,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Code/Users.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="102">
+          <caret line="6" column="23" lean-forward="true" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
           <folding />
         </state>
       </provider>
