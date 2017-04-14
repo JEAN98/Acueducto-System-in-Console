@@ -10,7 +10,7 @@ class WaterMeter:
                self.OwnerID = i.OwnerID #Get in requestList
                self.status = False  # All water meters starts in False status    False = Pending and True =  Pay Ready
                self.amount = amount
-               self.amountPrevious = amount
+               self.amountPreviousCubicMeters = amount
                waterMeterList.append(self)
 
        def printWaterMeter(self):

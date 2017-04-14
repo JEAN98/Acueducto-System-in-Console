@@ -7,6 +7,7 @@ class ReadsWaterMeter:
         self.waterMeterID = waterMater.ID   #waterMeter is a object
         self.inpesctorID = inspectorID
         self.status = waterMater.status
+        self.amountPreviousCubicMeters= waterMater.cubicMeters
         self.cubicMeters = cubicMeters
         now = datetime.datetime.now()
         plantillaFecha = "{}/{}/{}"
@@ -19,7 +20,6 @@ class ReadsWaterMeter:
         #Here can update reads
         for i in readsWaterMeterList:
             if i == self:
-
                 i.waterMeterID = waterMater.ID  # waterMeter is a object
                 i.inpesctorID = inspectorID
                 i.status = waterMater.status
@@ -55,7 +55,22 @@ class ReadsWaterMeter:
        return 0   #If this method can to return 0 is because does not exist
 
 
+
     def deleteReadsWaterMeter(self):
         readsWaterMeterList.remove(self) #Here can delete the information the object in listReadsWaterMeters
         print("Successful elimination!!")
+
+
+
+
+
+    def payWaterMer(self, waterMeterID):
+
+        for i in readsWaterMeterList:
+            if waterMeterID == i.waterMeterID:
+                if i.status == False:
+                    i.status = True
+                    return "Payment ready, congratulations!!"
+                else:
+                    return "This water meter is already paid!"
 
