@@ -150,7 +150,7 @@ def __menuInspectors():
         waterMeterCode = input("Enter the water meter ID: ")
         amount = float(input("Enter the amount the water meter have: "))
         WaterMeter(requestList,waterMeterCode,amount)
-
+        requestList.clear()
 
     elif option == "2":
         #Make reads water meter
@@ -164,7 +164,7 @@ def __menuInspectors():
         else:
             cubicsMeter = float(input("Enter the get cubic meter: "))
             ReadsWaterMeter(cubicsMeter,waterMeterObj,inspectorID)
-            requestList.clear()
+
 
     elif option == "3":
 
