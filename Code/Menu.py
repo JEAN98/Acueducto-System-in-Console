@@ -8,10 +8,10 @@ inspectorID=""
 class Menu:
 
     def __init__(self):
-        from Menu import Menu
 
         self.__colors = Colors()
         self.__subscribers  = Subscribers()
+
     def __menuPrincipal(self):
         'Print the main menu'
 
@@ -101,13 +101,17 @@ class Menu:
 
             self.__subscribers.modifySubscribers(oldId, id, fullName, addres, telephone)
 
-            print("{0}\nWas successfully modified to{2}{1}\n".format(self.__colors.getGreen(),
+            print("{0}\nWas successfully modified to {2}{1}\n".format(self.__colors.getGreen(),
                                                                   self.__colors.getWhite(),
                                                                   fullName))
 
         elif option == "3":
 
-            print("option#3")
+            id = int(input("Enter the ID of subscriber:\n"))
+
+            print("{0}\nWas successfully deleted to {2}{1}\n".format(self.__colors.getGreen(),
+                                                                     self.__colors.getWhite(),
+                                                                     self.__subscribers.deleteSubscribers(id)))
 
         elif option == "4":
 

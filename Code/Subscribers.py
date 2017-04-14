@@ -41,6 +41,21 @@ class Subscribers:
 
             i += 1
 
+    def deleteSubscribers(self, id):
+        """Modify a user in the list subscribers.
+        You need old, identification, full name, addres, telephone."""
+
+        i = 0
+        while i < len(self.__listSubscribers):
+
+            if id == self.__listSubscribers[i].getId():
+
+                copyName = self.__listSubscribers[i].getFullname()
+                del self.__listSubscribers[i]
+                return copyName
+
+            i += 1
+
 
     def sortedList(self):
         'Sort the list subscribers'
