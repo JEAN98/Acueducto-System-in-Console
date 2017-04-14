@@ -60,9 +60,25 @@ class ReadsWaterMeter:
         readsWaterMeterList.remove(self) #Here can delete the information the object in listReadsWaterMeters
         print("Successful elimination!!")
 
+    def searchPendingInvoicesByClient(self, ownerID):
+        # Maked a string that let us know the waterMeters pending for pay in our system
+        resultPendigInvoices = "Pending invoices in these water meters: "
 
+        # The cont variable let us know where we need to put the "," in our string
+        cont = 0
+        # The method search by ownerID, and then search all his watermeter that they need be payed
+        for i in readsWaterMeterList:
+            if i.ownerID == ownerID:
+                if i.status == False:
+                    if cont > 0:
+                        resultPendigInvoices += " , "
 
-
+                    resultPendigInvoices += str(i.waterMeterID)
+                    cont += 1
+        if cont > 0:
+            return resultPendigInvoices
+        else:
+            return "No outstanding invoice!"
 
     def payWaterMer(self, waterMeterID):
 
