@@ -164,7 +164,7 @@ def __menuInspectors():
         else:
             cubicsMeter = float(input("Enter the get cubic meter: "))
             ReadsWaterMeter(cubicsMeter,waterMeterObj,inspectorID)
-
+            requestList.clear()
 
     elif option == "3":
 
