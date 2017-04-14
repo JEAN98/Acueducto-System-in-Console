@@ -10,8 +10,12 @@ class Subscribers:
         self.__colors = Colors()
 
         self.__listSubscribers.append(Subscriber(2, "Juan Castellon", "Boca de Arenal", "77778888"))
-
         self.__listSubscribers.append(Subscriber(1, "Allan Castellon", "Boca de Arenal", "77778888"))
+        self.__listSubscribers.append(Subscriber(205710037,"Eduardo Murillo Rojas","25 meters South of San José De La Tigra school, San Carlos","24688450"))
+        self.__listSubscribers.append(Subscriber(209310328,"Mónica Carranza Vargas","50 meters East of San José De La Tigra school, San Carlos","24688232"))
+        self.__listSubscribers.append(Subscriber(203200401,"Enrique Segura Castro","100 meters West of San José De La Tigra school, San Carlos","24688071"))
+        self.__listSubscribers.append(Subscriber(200700134,"Vanessa Rosales Ramos","150 meters North of San José De La Tigra school, San Carlos","24688329"))
+        self.__listSubscribers.append(Subscriber(201290710,"Alexander Méndez Solera","200 meters Southeast of San José De La Tigra school, San Carlos","24688560"))
 
     def getList(self):
         'Return the list of subscribers'
