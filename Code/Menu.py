@@ -73,8 +73,9 @@ class Menu:
               "1) Create Subscriber.\n",
               "2) Modify Subscriber.\n",
               "3) Delete Subscriber.\n",
-              "4) View All Subscribers.\n "
-              "5) Exit.")
+              "4) View All Subscribers.\n",
+              "5) View Subcribers by ID.\n",
+              "6) Exit.")
         option = input("Select one option: ")
 
         if option == "1":
@@ -119,6 +120,12 @@ class Menu:
             self.__subscribers.printList()
 
         elif option == "5":
+
+            id = int(input("Enter the ID of subscriber:\n"))
+
+            self.__subscribers.printSubscriber(id)
+
+        elif option == "6":
 
             return
 
