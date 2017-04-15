@@ -1,5 +1,4 @@
 
-from Code.WaterMeter import WaterMeter
 readsWaterMeterList = []
 class ReadsWaterMeter:
 
