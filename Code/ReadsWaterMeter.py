@@ -1,30 +1,27 @@
-import datetime
+
 from Code.WaterMeter import WaterMeter
 readsWaterMeterList = []
 class ReadsWaterMeter:
 
-    def __init__(self,cubicMeters,waterMater,inspectorID):
+    def __init__(self,cubicMeters,waterMater,inspectorID,period):
 
         self.waterMeterID = waterMater.ID   #waterMeter is a object
         self.inpesctorID = inspectorID
-        self.status = False #False = Pending and True =  Pay Ready
+        self.status = False  #(False) = Pending and True =  Pay Ready
         self.cubicMeters = cubicMeters
-        now = datetime.datetime.now()
-        plantillaFecha = "{}/{}/{}"
-        self.fecha = plantillaFecha.format(now.day, now.month, now.year) #Get date time by sistem
+        self.period = period
         readsWaterMeterList.append(self)
         print("Read water meter added!!")
 
 
-    def updateReadsWaterMeter(self,cubicMeters):
+    def updateReadsWaterMeter(self,cubicMeters,period):
         #Here can update reads
         for i in readsWaterMeterList:
             if i == self:
 
                 i.cubicMeters = cubicMeters
-                now = datetime.datetime.now()
-                plantillaFecha = "{}/{}/{}"
-                i.fecha = plantillaFecha.format(now.day, now.month, now.year)  # Get date time by sistem
+                i.period = period
+
                 print("Successful actualization!!")
 
 
@@ -68,7 +65,6 @@ class ReadsWaterMeter:
 
     def deleteReadsWaterMeter(self):
         # Here can delete the information the reading in listReadsWaterMeters
-
         readsWaterMeterList.remove(self)
         print("Successful elimination!!")
 
