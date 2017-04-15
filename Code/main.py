@@ -1,8 +1,8 @@
-from Code.LogInSystem import LogInSystem
-from Code.Colors import Colors
-from Code.WaterMeter import WaterMeter
-from Code.Subscribers import Subscribers
-from Code.ReadsWaterMeter import ReadsWaterMeter
+from LogInSystem import LogInSystem
+from Colors import Colors
+from WaterMeter import WaterMeter
+from Subscribers import Subscribers
+from ReadsWaterMeter import ReadsWaterMeter
 
 personID = ""
 

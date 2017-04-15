@@ -1,5 +1,5 @@
-from Code.Colors import Colors
-from Code.Subscriber import Subscriber
+from Colors import Colors
+from Subscriber import Subscriber
 
 class Subscribers:
 
