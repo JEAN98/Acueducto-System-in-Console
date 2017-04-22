@@ -10,6 +10,34 @@ requestList = [] #In this list we are going to save the request created by admin
  #in this list we are going to save the reads by inspectors
 inspectorID=""
 
+
+
+def __readsWaterMeterMenu():
+    print("{0}********Readings Menu ********{2}   ID: {3} User: {4}{1}\n".format(__colors.getBlue(),
+                                                                                     __colors.getWhite(),
+                                                                                     __colors.getOrange()),
+    "1) Print Readings water meter\n",
+    "2) Update readings water meter \n",
+    "3) Delete readings water meter\n"
+    "4) Return")
+    option = input("Select one option: ")
+
+    if option == "1":
+        print("")
+
+    elif option == "2":
+
+        print("option#2")
+
+
+    elif option == "3":
+        print("option#3")
+
+    elif option == "4":
+        return
+
+    __readsWaterMeterMenu()
+
 def __menuAdministradores():
 
     print("{0}********ADMINISTRATOR MENU********{2}   ID: {3} User: {4}{1}\n".format(__colors.getBlue(),
@@ -22,7 +50,8 @@ def __menuAdministradores():
           "3) Billing.\n",
           "4) Meter Requests.\n",
           "5) Queries.\n",
-          "6) Logout.")
+          "6) Readings WaterMeter. \n"
+          "7) Logout.")
 
     option = input("Select one option: ")
 
@@ -50,6 +79,10 @@ def __menuAdministradores():
         print("option#5")
 
     elif option == "6":
+
+        __readsWaterMeterMenu()
+
+    elif option == "7":
 
         print("Good Bye")
         return

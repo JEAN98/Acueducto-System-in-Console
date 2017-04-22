@@ -2,13 +2,13 @@
 readsWaterMeterList = []
 class ReadsWaterMeter:
 
-    def __init__(self,cubicMeters,waterMater,inspectorID,period):
+    def __init__(self,cubicMeters,waterMater,inspectorID):
 
         self.waterMeterID = waterMater.ID   #waterMeter is a object
         self.inpesctorID = inspectorID
         self.status = False  #(False) = Pending and True =  Pay Ready
         self.cubicMeters = cubicMeters
-        self.period = period
+        self.period = ""
         readsWaterMeterList.append(self)
         print("Read water meter added!!")
 
@@ -17,7 +17,6 @@ class ReadsWaterMeter:
         #Here can update reads
         for i in readsWaterMeterList:
             if i == self:
-
                 i.cubicMeters = cubicMeters
                 i.period = period
 
@@ -35,7 +34,7 @@ class ReadsWaterMeter:
             print("Status: Ready payment")
 
         print("CubicMeters: "+str(self.cubicMeters))
-        print("DateTime: "+str(self.fecha))
+        print("DateTime: "+str(self.period))
 
     def printAllReadWaterMeter(self):
         #Here we can print all readsWaterMeter
