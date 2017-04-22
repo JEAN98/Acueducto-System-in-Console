@@ -1,4 +1,4 @@
-
+import  datetime
 readsWaterMeterList = []
 class ReadsWaterMeter:
 
@@ -8,19 +8,23 @@ class ReadsWaterMeter:
         self.inpesctorID = inspectorID
         self.status = False  #(False) = Pending and True =  Pay Ready
         self.cubicMeters = cubicMeters
-        self.period = ""
+        now = datetime.datetime.now()
+        plantillaFecha = "{}/{}/{} {}:{}:{}"
+
+        self.__fecha = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
         readsWaterMeterList.append(self)
         print("Read water meter added!!")
 
 
-    def updateReadsWaterMeter(self,cubicMeters,period):
+    def updateReadsWaterMeter(self,ID,cubicMeters,period):
         #Here can update reads
         for i in readsWaterMeterList:
-            if i == self:
+            if i.waterMeterID == ID:
                 i.cubicMeters = cubicMeters
                 i.period = period
 
                 print("Successful actualization!!")
+                return
 
 
     def printReadWaterMeter(self):

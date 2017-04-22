@@ -12,6 +12,7 @@ inspectorID=""
 
 
 def __askInformationReadings(number):
+
     ID = input("Enter the water meter ID: ")
     reading = ReadsWaterMeter.searchReadWaterMeter(None, ID)
 
@@ -21,26 +22,29 @@ def __askInformationReadings(number):
         __askInformationReadings(number)
     else:
        if number =="2":
-          ReadsWaterMeter.printReadWaterMeter(reading)
+          cubicMeters = int(input("Enter the amount in cubic meter: "))
+          period = input("Enter the date time: ")
+          ReadsWaterMeter.updateReadsWaterMeter(None,ID,cubicMeters,period)
 
        elif number=="3":
-           print("Update")
+           ReadsWaterMeter.deleteReadsWaterMeter(reading)
 
     return
 
 def __readsWaterMeterMenu():
-    print("{0}********Readings Menu ********\n",
-    "1) Print Readings water meter\n",
-    "2) Update readings water meter \n",
-    "3) Delete readings water meter\n"
-    "4) Return")
+    print("********Readings Menu ********\n",
+                                "1) Print Readings water meter\n",
+                                "2) Update readings water meter \n",
+                                "3) Delete readings water meter\n"
+                                "4) Return")
+
     option = input("Select one option: ")
 
     if option == "1":
         ReadsWaterMeter.printAllReadWaterMeter(None)
 
     elif option == "2":
-        __askInformationReadings("2")
+        __askInformationReadings("2")  #Called the method that let us ask about the information for Queries
 
     elif option == "3":
         __askInformationReadings("3")
