@@ -101,12 +101,12 @@ class ReadsWaterMeter:
                 if number == 1:
                     ReadsWaterMeter.updateStatus(None,reading.waterMeterID)   #Upadete Status
 
-
-
-
+                return price
 
 
     def PendingInvoicesByClient(self,ownerID,key,WaterMeterID): #key=1 payment, key=2 no payment
+
+
         waterMeterListbyOwner = WaterMeter.getWaterMetersByOwner(None,ownerID)
         # Make a string that let us know the waterMeters pending for pay in our system
         resultPendigInvoices = " "

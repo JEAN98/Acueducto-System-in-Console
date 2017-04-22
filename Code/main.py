@@ -56,6 +56,7 @@ def __readsWaterMeterMenu():
 
 def __billingMenu():
     adminName = __logIn.getUser().getFullName()
+    ownerName =""
     now = datetime.datetime.now()
     plantillaFecha = "{}/{}/{} {}:{}:{}"
     date = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
@@ -64,13 +65,25 @@ def __billingMenu():
     if option == "1":
         ownerID = input("Write the ownerID: ")
 
-        print(ReadsWaterMeter.searchPendingInvoicesByClient(None,ownerID,))
+        print("Pending invoice in these waterMeter: " + ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,0,""))
         print("\n1)Cancel all invoices\n","2)Cancel a specific invoice \n")
 
         option2 = input("Write the option: ")
 
+
         if option2 == "1":
-            print(ReadsWaterMeter.calculateInvoice(None,ownerID,1,adminName))
+            print("*****Bill*****")
+            print("Owner ID: "+ownerID +"\nName: "+ ownerName + "\nPaid readings in these water meters: "
+                  +ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,1,"")+
+                  "\nAdmin name: "+adminName + "\nDate Time: "+date +"\n")
+
+        elif option2 =="2":
+            waterMeterID=input("Write the waterMeter ID: ")
+            print("*****Bill*****")
+            print("Owner ID: " + ownerID + "\nName: " + ownerName + "\nPaid readings in these water meters: "
+                  + ReadsWaterMeter.PendingInvoicesByClient(None, ownerID, 1,waterMeterID) +
+                  "\nAdmin name: " + adminName + "\nDate Time: " + date + "\n")
+
 
     elif option == "2":
         return
