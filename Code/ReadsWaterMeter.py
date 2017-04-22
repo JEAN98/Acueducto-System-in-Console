@@ -74,34 +74,9 @@ class ReadsWaterMeter:
         print("Successful elimination!!")
         print("")
 
-    def searchPendingInvoicesByClient(self, ownerID):
-        # Maked a string that let us know the waterMeters pending for pay in our system
-        resultPendigInvoices = "Pending invoices in these water meters: "
 
-        # The cont variable let us know where we need to put the "," in our string
-        cont = 0
-        # The method search by ownerID, and then search all his watermeter that they need be payed
-        for i in readsWaterMeterList:
-            if i.ownerID == ownerID:
-                if i.status == False:
-                    if cont > 0:
-                        resultPendigInvoices += " , "
 
-                    resultPendigInvoices += str(i.waterMeterID)
-                    cont += 1
-        if cont > 0:
-            return resultPendigInvoices
-        else:
-            return "No outstanding invoice!"
-
-    def calculatePrice(self):
-
-        oldAmount = WaterMeter.getCubicMeters(None,self.waterMeterID) #we need search the old amount,
-        price = (((self.cubicMeters - oldAmount)- 80)*0,1) + 4  #Determination of price
-        ReadsWaterMeter.payWaterMer(None,self.waterMeterID)   #Upadete Status
-        return price
-
-    def payWaterMer(self, waterMeterID):
+    def updateStatus(self, waterMeterID):
         #In this method the admin can to make payments
         for i in readsWaterMeterList:
             if waterMeterID == i.waterMeterID:
@@ -112,3 +87,58 @@ class ReadsWaterMeter:
                 else:
                     return "This water meter is already paid!"
 
+
+
+    def calculateInvoice(self,waterMeterID,number):
+
+        for reading in readsWaterMeterList:
+            if reading.waterMeterID == waterMeterID:
+                oldAmount = WaterMeter.getCubicMeters(None,reading.waterMeterID) #we need search the old amount,
+                price = (((reading.cubicMeters - oldAmount)- 80)*0,1) + 4  #Determination of price
+
+
+
+                if number == 1:
+                    ReadsWaterMeter.updateStatus(None,reading.waterMeterID)   #Upadete Status
+
+
+
+
+
+
+    def PendingInvoicesByClient(self,ownerID,key,WaterMeterID): #key=1 payment, key=2 no payment
+        waterMeterListbyOwner = WaterMeter.getWaterMetersByOwner(None,ownerID)
+        # Make a string that let us know the waterMeters pending for pay in our system
+        resultPendigInvoices = " "
+        totalPrice = 0
+        # The cont variable let us know where we need to put the "," in our string
+        cont = 0
+        # The method search by ownerID, and then search all his watermeter that they need be payed
+        for j in waterMeterListbyOwner:
+            for i in readsWaterMeterList:
+                if WaterMeterID != "":
+                    if j.waterMeterID == WaterMeterID:
+
+                        resultPendigInvoices += str(j.waterMeterID)
+                        readingPrice = ReadsWaterMeter.calculateInvoice(j.waterMeterID, key) #pay one
+                        resultPendigInvoices += " price: "+str(readingPrice)
+                        totalPrice += readingPrice
+                        return readingPrice
+
+
+
+                if j.waterMeterID == i.waterMeterID:
+                    if j.status == False:
+                        if cont > 0:
+                            resultPendigInvoices += " , " #Add character
+
+                        resultPendigInvoices += str(j.waterMeterID)
+                        readingPrice = ReadsWaterMeter.calculateInvoice(j.waterMeterID, key) #Get the price for every reading and if key == 1 pay all
+                        resultPendigInvoices += " price: "+str(readingPrice)
+                        totalPrice += readingPrice
+                        cont += 1
+        if cont > 0:
+            return resultPendigInvoices + "\n Total price: " + str(totalPrice)
+
+        else:
+            return "No outstanding invoice!"

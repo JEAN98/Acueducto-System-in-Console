@@ -3,12 +3,12 @@ from Colors import Colors
 from WaterMeter import WaterMeter
 from Subscribers import Subscribers
 from ReadsWaterMeter import ReadsWaterMeter
-
-personID = ""
+import datetime
 
 requestList = [] #In this list we are going to save the request created by admin
  #in this list we are going to save the reads by inspectors
 inspectorID=""
+
 
 
 def __askInformationReadings(number):
@@ -55,7 +55,34 @@ def __readsWaterMeterMenu():
     __readsWaterMeterMenu()
 
 def __billingMenu():
-    print("*******Billing Menu*******\n","")
+    adminName = __logIn.getUser().getFullName()
+    now = datetime.datetime.now()
+    plantillaFecha = "{}/{}/{} {}:{}:{}"
+    date = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
+
+    option = input("*******Billing Menu*******\n","1)Search pending invoice by Owner\n","2) Return\n","Enter a option: ")
+    if option == "1":
+        ownerID = input("Write the ownerID: ")
+
+        print(ReadsWaterMeter.searchPendingInvoicesByClient(None,ownerID,))
+        print("\n1)Cancel all invoices\n","2)Cancel a specific invoice \n")
+
+        option2 = input("Write the option: ")
+
+        if option2 == "1":
+            print(ReadsWaterMeter.calculateInvoice(None,ownerID,1,adminName))
+
+    elif option == "2":
+        return
+    else:
+        print("(xxxxx)Character incorrect\n")
+        __billingMenu()
+
+    __billingMenu()
+
+
+
+
 def __menuAdministradores():
 
     print("{0}********ADMINISTRATOR MENU********{2}   ID: {3} User: {4}{1}\n".format(__colors.getBlue(),
@@ -255,7 +282,7 @@ def menuApp():
             __menuAdministradores()
 
         elif state and not admin:
-
+            inspectorID = id
             __menuInspectors()
 
         else:

@@ -22,4 +22,12 @@ class WaterMeter:
                 if ID == i.waterMeterID:
                     return i.amount
 
+       def getWaterMetersByOwner(self,ownerID):
+           waterMeterByOwnerList =[]
+           for waterMeter in waterMeterList:
+               if waterMeter.OwnerID == ownerID:
+                   waterMeterByOwnerList.append(waterMeter)
+
+           return waterMeterByOwnerList
+
 
