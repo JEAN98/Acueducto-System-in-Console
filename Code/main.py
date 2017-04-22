@@ -54,6 +54,8 @@ def __readsWaterMeterMenu():
 
     __readsWaterMeterMenu()
 
+def __billingMenu():
+    print("*******Billing Menu*******\n","")
 def __menuAdministradores():
 
     print("{0}********ADMINISTRATOR MENU********{2}   ID: {3} User: {4}{1}\n".format(__colors.getBlue(),

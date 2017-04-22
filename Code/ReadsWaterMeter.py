@@ -1,4 +1,5 @@
 import  datetime
+from WaterMeter import *
 readsWaterMeterList = []
 class ReadsWaterMeter:
 
@@ -93,12 +94,20 @@ class ReadsWaterMeter:
         else:
             return "No outstanding invoice!"
 
+    def calculatePrice(self):
+
+        oldAmount = WaterMeter.getCubicMeters(None,self.waterMeterID) #we need search the old amount,
+        price = (((self.cubicMeters - oldAmount)- 80)*0,1) + 4  #Determination of price
+        ReadsWaterMeter.payWaterMer(None,self.waterMeterID)   #Upadete Status
+        return price
+
     def payWaterMer(self, waterMeterID):
         #In this method the admin can to make payments
         for i in readsWaterMeterList:
             if waterMeterID == i.waterMeterID:
                 if i.status == False:
                     i.status = True
+                    WaterMeter.updateCubicMeters(None,i.waterMeterID,i.cubicMeters)
                     return "Payment ready, congratulations!!"
                 else:
                     return "This water meter is already paid!"

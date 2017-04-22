@@ -17,13 +17,9 @@ class WaterMeter:
                if ID == i.waterMeterID:
                     i.amount = newAmount
 
-
-
-       def updateStatus(self,ID):
+       def getCubicMeters(self,ID):
             for i in waterMeterList:
                 if ID == i.waterMeterID:
-                  i.status = True  # Here can update the status , if the user pay for his water (False = Pending and True =  Pay Ready)
-                  i.amountPrevious = i.amount # Amount previous, let us to find out how to person should pay for his or her water
-                  print("Successful actualization!!")
-                  return
+                    return i.amount
+
 
