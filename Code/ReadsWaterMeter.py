@@ -3,16 +3,16 @@ from WaterMeter import *
 readsWaterMeterList = []
 class ReadsWaterMeter:
 
-    def __init__(self,cubicMeters,waterMater,inspectorID):
+    def __init__(self,cubicMeters,waterMeterID,inspectorID):
 
-        self.waterMeterID = waterMater.ID   #waterMeter is a object
+        self.waterMeterID = waterMeterID  #waterMeter is a object
         self.inpesctorID = inspectorID
         self.status = False  #(False) = Pending and True =  Pay Ready
         self.cubicMeters = cubicMeters
         now = datetime.datetime.now()
         plantillaFecha = "{}/{}/{} {}:{}:{}"
 
-        self.__fecha = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
+        self.period = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
         readsWaterMeterList.append(self)
         print("Read water meter added!!")
 
@@ -32,16 +32,16 @@ class ReadsWaterMeter:
     def printReadWaterMeter(self):
         #Here we can print a readWaterMeter
 
-        print("***ReadWaterMeter ID: "+ str(self.waterMeterID)+"***"+"\n"+
-              "InspectorID: "+str(self.inpesctorID) +"\n")
+        print("***Reading in ID: "+ str(self.waterMeterID)+"***"+"\n"+
+              "InspectorID: "+self.inpesctorID)
         if self.status == False:
             print("Status: Pending payment")
         else:
             print("Status: Ready payment")
 
         print("CubicMeters: "+str(self.cubicMeters))
-        print("DateTime: "+str(self.period))
-        print("*************************")
+        print("DateTime: "+ self.period)
+        print("*************************\n")
 
     def printAllReadWaterMeter(self):
         #Here we can print all readsWaterMeter

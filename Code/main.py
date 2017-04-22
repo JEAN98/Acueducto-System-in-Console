@@ -9,6 +9,14 @@ requestList = [] #In this list we are going to save the request created by admin
  #in this list we are going to save the reads by inspectors
 inspectorID=""
 
+WaterMeter("2","222",0)
+WaterMeter("1","111",100)
+WaterMeter("205710037","1234",98)
+
+
+ReadsWaterMeter(150,"222","2")
+ReadsWaterMeter(250,"111","2")
+ReadsWaterMeter(300,"1234","2")
 
 
 def __askInformationReadings(number):
@@ -33,7 +41,7 @@ def __askInformationReadings(number):
 
 def __readsWaterMeterMenu():
     print("********Readings Menu ********\n",
-                                "1) Print Readings water meter\n",
+                                "1) Print readings water meter\n",
                                 "2) Update readings water meter \n",
                                 "3) Delete readings water meter\n"
                                 "4) Return")
@@ -240,21 +248,24 @@ def __menuInspectors():
         # Serch if is in the list
         waterMeterCode = input("Enter the water meter ID: ")
         amount = float(input("Enter the amount the water meter have: "))
-        WaterMeter(requestList,waterMeterCode,amount)
+        for i in requestList:
+            WaterMeter(i.OwnerID,waterMeterCode,amount)
+
         requestList.clear()
 
     elif option == "2":
         #Make reads water meter
 
         waterMeterID = input("Enter the water meter ID: ")
-        waterMeterObj = WaterMeter.searchWaterMaterList(None,waterMeterID)
 
-        if waterMeterObj == 0:
+        result = WaterMeter.searchWaterMeter(None,waterMeterID) #Search water Meter
+
+        if result == "":
             print(waterMeterID+" Does not exist!!")
             __menuInspectors()
         else:
             cubicsMeter = float(input("Enter the get cubic meter: "))
-            ReadsWaterMeter(cubicsMeter,waterMeterObj,inspectorID)
+            ReadsWaterMeter(cubicsMeter,waterMeterID,inspectorID)
 
 
     elif option == "3":
