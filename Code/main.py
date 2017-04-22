@@ -11,11 +11,25 @@ requestList = [] #In this list we are going to save the request created by admin
 inspectorID=""
 
 
+def __askInformationReadings(number):
+    ID = input("Enter the water meter ID: ")
+    reading = ReadsWaterMeter.searchReadWaterMeter(None, ID)
+
+    if reading == 0:
+        print("(xxxx)The ID wrote doesn't exist(xxxx)")
+        print("")
+        __askInformationReadings(number)
+    else:
+       if number =="2":
+          ReadsWaterMeter.printReadWaterMeter(reading)
+
+       elif number=="3":
+           print("Update")
+
+    return
 
 def __readsWaterMeterMenu():
-    print("{0}********Readings Menu ********{2}   ID: {3} User: {4}{1}\n".format(__colors.getBlue(),
-                                                                                     __colors.getWhite(),
-                                                                                     __colors.getOrange()),
+    print("{0}********Readings Menu ********\n",
     "1) Print Readings water meter\n",
     "2) Update readings water meter \n",
     "3) Delete readings water meter\n"
@@ -23,15 +37,13 @@ def __readsWaterMeterMenu():
     option = input("Select one option: ")
 
     if option == "1":
-        print("")
+        ReadsWaterMeter.printAllReadWaterMeter(None)
 
     elif option == "2":
-
-        print("option#2")
-
+        __askInformationReadings("2")
 
     elif option == "3":
-        print("option#3")
+        __askInformationReadings("3")
 
     elif option == "4":
         return
