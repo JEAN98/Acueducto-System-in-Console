@@ -8,31 +8,15 @@ class WaterMeter:
 
                self.waterMeterID = waterMeterID
                self.OwnerID = i.OwnerID #Get in requestList
-
                self.amount = amount
-               self.amountPreviousCubicMeters = amount
                waterMeterList.append(self)
 
-       def printWaterMeter(self):
-           #Here we can to print object that exist in list
-
-           print("***Water meter: "+ str(self.waterMeterID)+"***")
-           print("OwnerID: "+str(self.OwnerID))
-           if self.status == False:
-               print("Status: Pending payment")
-           else:
-               print("Status: Ready payment")
-
-           print("Amount in the waterMeter: "+str(self.amount))
-
-
-
-       def searchWaterMaterList(self, ID):
+       def updateCubicMeters(self, ID,newAmount):
+           #Here we can Update the cubicMeters
           for i in waterMeterList:
                if ID == i.waterMeterID:
-                 return i
+                    i.amount = newAmount
 
-          return 0  ##If this method can to return 0 is because does not exist
 
 
        def updateStatus(self,ID):

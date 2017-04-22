@@ -41,13 +41,13 @@ def __readsWaterMeterMenu():
     option = input("Select one option: ")
 
     if option == "1":
-        ReadsWaterMeter.printAllReadWaterMeter(None)
+        ReadsWaterMeter.printAllReadWaterMeter(None) #Print all readings
 
     elif option == "2":
-        __askInformationReadings("2")  #Called the method that let us ask about the information for Queries
+        __askInformationReadings("2")  #Called the method that let us ask about the information for Queries in readings
 
     elif option == "3":
-        __askInformationReadings("3")
+        __askInformationReadings("3") #Called the method that let us ask about the information for Queries in readings
 
     elif option == "4":
         return

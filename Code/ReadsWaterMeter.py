@@ -24,6 +24,7 @@ class ReadsWaterMeter:
                 i.period = period
 
                 print("Successful actualization!!")
+                print("")
                 return
 
 
@@ -39,6 +40,7 @@ class ReadsWaterMeter:
 
         print("CubicMeters: "+str(self.cubicMeters))
         print("DateTime: "+str(self.period))
+        print("*************************")
 
     def printAllReadWaterMeter(self):
         #Here we can print all readsWaterMeter
@@ -69,6 +71,7 @@ class ReadsWaterMeter:
         # Here can delete the information the reading in listReadsWaterMeters
         readsWaterMeterList.remove(self)
         print("Successful elimination!!")
+        print("")
 
     def searchPendingInvoicesByClient(self, ownerID):
         # Maked a string that let us know the waterMeters pending for pay in our system
