@@ -129,11 +129,10 @@ def __menuAdministradores():
                                                                                 __logIn.getUser().getId(),
                                                                                 __logIn.getUser().getFullName()),
           "1) Subscribers.\n",
-          "2) Measuring.\n",
+          "2) Readings.\n",
           "3) Billing.\n",
           "4) Meter Requests.\n",
           "5) Queries.\n",
-          "6) Readings WaterMeter. \n"
           "7) Logout.")
 
     option = input("Select one option: ")
@@ -143,9 +142,7 @@ def __menuAdministradores():
         __menuSubscriber()
 
     elif option == "2":
-
-        print("option#2")
-
+        __readsWaterMeterMenu()
 
     elif option == "3":
 
@@ -154,16 +151,12 @@ def __menuAdministradores():
 
     elif option == "4":
 
-        print("option#4")
+        __menuRequestsMeters()
 
 
     elif option == "5":
 
         print("option#5")
-
-    elif option == "6":
-
-        __readsWaterMeterMenu()
 
     elif option == "7":
 
@@ -247,6 +240,33 @@ def __menuSubscriber():
         print("Invalid option")
 
     __menuSubscriber()
+
+def __menuRequestsMeters():
+    print("{0}********REQUESTS METERS MENU ********{2}   ID: {3} User: {4}{1}\n".format(__colors.getBlue(),
+                                                                                    __colors.getWhite(),
+                                                                                    __colors.getOrange(),
+                                                                                    __logIn.getUser().getId(),
+                                                                                    __logIn.getUser().getFullName()),
+          "1) View All Requests Meters.\n",
+          "2) View Request Meter by ID.\n",
+          "3) View Request Meter by ID of the subscriber.\n",
+          "4) Back.")
+    option = input("Select one option: ")
+
+    if option == "1":
+        pass
+
+    elif option == "2":
+        pass
+
+    elif option == "3":
+        pass
+
+    elif option == "4":
+        pass
+    else:
+        pass
+
 
 def __menuInspectors():
 
