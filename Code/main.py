@@ -305,7 +305,7 @@ def menuApp():
     print("    1) Log In\n"
           "    2) Sign Up\n"
           "    3) Exit")
-    print(__requestMeters)
+
     option = input("Enter an option: ")
 
     print("")

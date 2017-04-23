@@ -91,6 +91,6 @@ class Subscribers:
     def getSubscriber(self, id):
 
         for subscriber in self.__listSubscribers:
-            if subscriber.getId() == id:
+            if subscriber.getId() == int(id):
                 return subscriber
 
