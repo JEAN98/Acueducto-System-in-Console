@@ -73,7 +73,7 @@ def __billingMenu():
     option = input("Enter a option: ")
     if option == "1":
         ownerID = input("Write the ownerID: ")
-        owner = Subscribers.getSubscriber(None,ownerID)
+        owner = __subscribers.getSubscriber(ownerID) #corrected
 
         result = ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,0,"")
 
