@@ -4,6 +4,8 @@ from WaterMeter import WaterMeter
 from Subscribers import Subscribers
 from ReadsWaterMeter import ReadsWaterMeter
 import datetime
+from RequestMeters import RequestMeters
+
 
 requestList = [] #In this list we are going to save the request created by admin
  #in this list we are going to save the reads by inspectors
@@ -105,9 +107,6 @@ def __billingMenu():
 
     __billingMenu()
 
-
-
-
 def __menuAdministradores():
 
     print("{0}********ADMINISTRATOR MENU********{2}   ID: {3} User: {4}{1}\n".format(__colors.getBlue(),
@@ -186,6 +185,7 @@ def __menuSubscriber():
         telephone = input("Enter the telephone of subscriber:\n")
 
         __subscribers.addSubscribers(id, fullName, addres, telephone)
+        __requestMeters.addRequestMeter(id, fullName, addres, telephone)
 
         print("{0}\nWas successfully added to{2}{1}\n".format(__colors.getGreen(),
                                                               __colors.getWhite(),
@@ -291,7 +291,7 @@ def menuApp():
     print("    1) Log In\n"
           "    2) Sign Up\n"
           "    3) Exit")
-
+    print(__requestMeters)
     option = input("Enter an option: ")
 
     print("")
@@ -351,4 +351,5 @@ def menuApp():
 __logIn = LogInSystem()
 __colors = Colors()
 __subscribers = Subscribers()
+__requestMeters = RequestMeters()
 menuApp()

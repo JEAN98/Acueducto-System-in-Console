@@ -6,7 +6,7 @@ class Users:
 
     def __init__(self):
 
-        self.__listUsers.append(User('207260950' , 'kmal', True, 'Kenet Acuña', 22, 'kmal.kenneth@gmail.com'))
+        self.__listUsers.append(User('1' , 'a', True, 'Kenet Acuña', 22, 'kmal.kenneth@gmail.com'))
         self.__listUsers.append(User('2', 'a', False, 'Juan Caballom', 30, 'kma@pito.es'))
         self.__listUsers.append(User("206950338","1992",True,"Steve Araya Solorzano",25,"stevenaraya.24@gmail.com"))
         self.__listUsers.append(User("201106154", "21", False, "Adelso Solorzano", 40, "adelso.24@gmail.com"))
