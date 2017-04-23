@@ -13,16 +13,19 @@ class ReadsWaterMeter:
         plantillaFecha = "{}/{}/{} {}:{}:{}"
 
         self.period = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
+        self.lastModified = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
         readsWaterMeterList.append(self)
-        print("Read water meter added!!")
 
 
-    def updateReadsWaterMeter(self,ID,cubicMeters,period):
+
+    def updateReadsWaterMeter(self,ID,cubicMeters):
         #Here can update reads
+        now = datetime.datetime.now()
+        plantillaFecha = "{}/{}/{} {}:{}:{}"
         for i in readsWaterMeterList:
             if i.waterMeterID == ID:
                 i.cubicMeters = cubicMeters
-                i.period = period
+                i.lastModified = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
 
                 print("Successful actualization!!")
                 print("")
@@ -32,7 +35,7 @@ class ReadsWaterMeter:
     def printReadWaterMeter(self):
         #Here we can print a readWaterMeter
 
-        print("***Reading in ID: "+ str(self.waterMeterID)+"***"+"\n"+
+        print("\n***Reading in ID: "+ str(self.waterMeterID)+"***"+"\n"+
               "InspectorID: "+self.inpesctorID)
         if self.status == False:
             print("Status: Pending payment")
@@ -41,6 +44,7 @@ class ReadsWaterMeter:
 
         print("CubicMeters: "+str(self.cubicMeters))
         print("DateTime: "+ self.period)
+        print("Last modified: "+self.lastModified)
         print("*************************\n")
 
     def printAllReadWaterMeter(self):
@@ -94,9 +98,9 @@ class ReadsWaterMeter:
         for reading in readsWaterMeterList:
             if reading.waterMeterID == waterMeterID:
                 oldAmount = WaterMeter.getCubicMeters(None,reading.waterMeterID) #we need search the old amount,
-                price = (((reading.cubicMeters - oldAmount)- 80)*0,1) + 4  #Determination of price
 
 
+                price = (((reading.cubicMeters - oldAmount) - 80)*0.1)+4  #Determination of price
 
                 if number == 1:
                     ReadsWaterMeter.updateStatus(None,reading.waterMeterID)   #Upadete Status
@@ -114,14 +118,14 @@ class ReadsWaterMeter:
         # The cont variable let us know where we need to put the "," in our string
         cont = 0
         # The method search by ownerID, and then search all his watermeter that they need be payed
-        for j in waterMeterListbyOwner:
-            for i in readsWaterMeterList:
+        for i in waterMeterListbyOwner:
+            for j in readsWaterMeterList:
                 if WaterMeterID != "":
                     if j.waterMeterID == WaterMeterID:
 
                         resultPendigInvoices += str(j.waterMeterID)
                         readingPrice = ReadsWaterMeter.calculateInvoice(j.waterMeterID, key) #pay one
-                        resultPendigInvoices += " price: "+str(readingPrice)
+                        resultPendigInvoices += " $ "+str(readingPrice)
                         totalPrice += readingPrice
                         return readingPrice
 
@@ -132,13 +136,13 @@ class ReadsWaterMeter:
                         if cont > 0:
                             resultPendigInvoices += " , " #Add character
 
-                        resultPendigInvoices += str(j.waterMeterID)
-                        readingPrice = ReadsWaterMeter.calculateInvoice(j.waterMeterID, key) #Get the price for every reading and if key == 1 pay all
-                        resultPendigInvoices += " price: "+str(readingPrice)
+                        resultPendigInvoices += "Water meter ID "+ str(j.waterMeterID)
+                        readingPrice = ReadsWaterMeter.calculateInvoice(None,j.waterMeterID, key) #Get the price for every reading and if key == 1 pay all
+                        resultPendigInvoices += " $"+str(readingPrice)
                         totalPrice += readingPrice
                         cont += 1
         if cont > 0:
-            return resultPendigInvoices + "\n Total price: " + str(totalPrice)
+            return resultPendigInvoices + "\nTotal price: $" + str(totalPrice)
 
         else:
-            return "No outstanding invoice!"
+            return "null"

@@ -31,8 +31,7 @@ def __askInformationReadings(number):
     else:
        if number =="2":
           cubicMeters = int(input("Enter the amount in cubic meter: "))
-          period = input("Enter the date time: ")
-          ReadsWaterMeter.updateReadsWaterMeter(None,ID,cubicMeters,period)
+          ReadsWaterMeter.updateReadsWaterMeter(None,ID,cubicMeters)
 
        elif number=="3":
            ReadsWaterMeter.deleteReadsWaterMeter(reading)
@@ -69,29 +68,34 @@ def __billingMenu():
     plantillaFecha = "{}/{}/{} {}:{}:{}"
     date = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
 
-    option = input("*******Billing Menu*******\n","1)Search pending invoice by Owner\n","2) Return\n","Enter a option: ")
+    print("*******Billing Menu*******\n","1)Search pending invoice by Owner\n","2) Return\n")
+    option = input("Enter a option: ")
     if option == "1":
-        ownerID = input("Write the ownerID: ")
+        ownerID = input("Write the ownerID: \n")
 
-        print("Pending invoice in these waterMeter: " + ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,0,""))
-        print("\n1)Cancel all invoices\n","2)Cancel a specific invoice \n")
+        result = ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,0,"")
 
-        option2 = input("Write the option: ")
+        if result != "null":
+            print("Pending invoice in these waterMeter: " + result)
+            print("\n1)Cancel all invoices\n","2)Cancel a specific invoice \n")
+
+            option2 = input("Write the option: ")
 
 
-        if option2 == "1":
-            print("*****Bill*****")
-            print("Owner ID: "+ownerID +"\nName: "+ ownerName + "\nPaid readings in these water meters: "
-                  +ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,1,"")+
-                  "\nAdmin name: "+adminName + "\nDate Time: "+date +"\n")
+            if option2 == "1":
+                print("*****Bill*****")
+                print("Owner ID: "+ownerID +"\nName: "+ ownerName + "\nPaid readings in these water meters: "
+                      +ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,1,"")+
+                      "\nAdmin name: "+adminName + "\nDate Time: "+date +"\n")
 
-        elif option2 =="2":
-            waterMeterID=input("Write the waterMeter ID: ")
-            print("*****Bill*****")
-            print("Owner ID: " + ownerID + "\nName: " + ownerName + "\nPaid readings in these water meters: "
-                  + ReadsWaterMeter.PendingInvoicesByClient(None, ownerID, 1,waterMeterID) +
-                  "\nAdmin name: " + adminName + "\nDate Time: " + date + "\n")
-
+            elif option2 =="2":
+                waterMeterID=input("Write the waterMeter ID: ")
+                print("*****Bill*****")
+                print("Owner ID: " + ownerID + "\nName: " + ownerName + "\nPaid readings in these water meters: "
+                      + ReadsWaterMeter.PendingInvoicesByClient(None, ownerID, 1,waterMeterID) +
+                      "\nAdmin name: " + adminName + "\nDate Time: " + date + "\n")
+        else:
+            print("There are no pending readings!!")
 
     elif option == "2":
         return
@@ -132,7 +136,7 @@ def __menuAdministradores():
 
     elif option == "3":
 
-        print("option#3")
+        __billingMenu()
 
 
     elif option == "4":
@@ -246,9 +250,10 @@ def __menuInspectors():
     if option == "1":
         #Water meter installaion
         # Serch if is in the list
-        waterMeterCode = input("Enter the water meter ID: ")
-        amount = float(input("Enter the amount the water meter have: "))
+        print("Write information for to install water meter!!")
         for i in requestList:
+            waterMeterCode = input("Enter the water meter ID: ")
+            amount = float(input("Enter the amount the water meter have: "))
             WaterMeter(i.OwnerID,waterMeterCode,amount)
 
         requestList.clear()
@@ -266,6 +271,7 @@ def __menuInspectors():
         else:
             cubicsMeter = float(input("Enter the get cubic meter: "))
             ReadsWaterMeter(cubicsMeter,waterMeterID,inspectorID)
+            print("Reading water meter added!!")
 
 
     elif option == "3":
