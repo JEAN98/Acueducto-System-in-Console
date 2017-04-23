@@ -87,9 +87,9 @@ class ReadsWaterMeter:
                 if i.status == False:
                     i.status = True
                     WaterMeter.updateCubicMeters(None,i.waterMeterID,i.cubicMeters)
-                    return "Payment ready, congratulations!!"
+                    return True #Payment already
                 else:
-                    return "This water meter is already paid!"
+                    return False #Payment had already been made
 
 
 
@@ -103,9 +103,16 @@ class ReadsWaterMeter:
                 price = (((reading.cubicMeters - oldAmount) - 80)*0.1)+4  #Determination of price
 
                 if number == 1:
-                    ReadsWaterMeter.updateStatus(None,reading.waterMeterID)   #Upadete Status
+                   result = ReadsWaterMeter.updateStatus(None,reading.waterMeterID)   #Upadete Status
+
+                   if result:
+                    return price
+
+                   else:
+                       return False #Payment had already been made
 
                 return price
+
 
 
     def PendingInvoicesByClient(self,ownerID,key,WaterMeterID): #key=1 payment, key=2 no payment
@@ -124,10 +131,15 @@ class ReadsWaterMeter:
                     if j.waterMeterID == WaterMeterID:
 
                         resultPendigInvoices += str(j.waterMeterID)
-                        readingPrice = ReadsWaterMeter.calculateInvoice(j.waterMeterID, key) #pay one
-                        resultPendigInvoices += " $ "+str(readingPrice)
-                        totalPrice += readingPrice
-                        return readingPrice
+                        readingPrice = ReadsWaterMeter.calculateInvoice(None,j.waterMeterID, key) #pay one
+
+                        if readingPrice == False:
+                            return "null"
+
+                        else:
+                            resultPendigInvoices += " $ "+str(readingPrice)
+                            totalPrice += readingPrice
+                            return resultPendigInvoices + "\nTotal price: $" + str(totalPrice)
 
 
 

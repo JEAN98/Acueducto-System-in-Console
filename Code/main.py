@@ -13,7 +13,7 @@ WaterMeter("2","222",0)
 WaterMeter("1","111",100)
 WaterMeter("205710037","1234",98)
 
-
+ReadsWaterMeter(100,"222","2")
 ReadsWaterMeter(150,"222","2")
 ReadsWaterMeter(250,"111","2")
 ReadsWaterMeter(300,"1234","2")
@@ -89,11 +89,24 @@ def __billingMenu():
                       "\nAdmin name: "+adminName + "\nDate Time: "+date +"\n")
 
             elif option2 =="2":
-                waterMeterID=input("Write the waterMeter ID: ")
-                print("*****Bill*****")
-                print("Owner ID: " + ownerID + "\nName: " + ownerName + "\nPaid readings in these water meters: "
-                      + ReadsWaterMeter.PendingInvoicesByClient(None, ownerID, 1,waterMeterID) +
-                      "\nAdmin name: " + adminName + "\nDate Time: " + date + "\n")
+
+                waterMeterID = input("Write the waterMeter ID: ")
+                verificationWaterMeter = WaterMeter.searchWaterMeter(None,waterMeterID)
+
+                if verificationWaterMeter == "":
+                    print("The watermeterID wrote doesn't exist(xxxx)")
+                    __billingMenu()
+
+                else:
+                    print("*****Bill*****")
+                    result = ReadsWaterMeter.PendingInvoicesByClient(None, ownerID, 1,waterMeterID)
+                    if result != "null":
+
+                        print("Owner ID: " + ownerID + "\nName: " + ownerName + "\nPaid readings in these water meters: "
+                          +  result +
+                          "\nAdmin name: " + adminName + "\nDate Time: " + date + "\n")
+                    else:
+                        print("Payment had already been made")
         else:
             print("There are no pending readings!!")
 
