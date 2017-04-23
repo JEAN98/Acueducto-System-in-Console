@@ -121,7 +121,7 @@ def __billingMenu():
 
     __billingMenu()
 
-def __menuAdministradores():
+def __menuAdministrators():
 
     print("{0}********ADMINISTRATOR MENU********{2}   ID: {3} User: {4}{1}\n".format(__colors.getBlue(),
                                                                                 __colors.getWhite(),
@@ -167,7 +167,7 @@ def __menuAdministradores():
 
         print("The option is incorrect\n")
 
-    __menuAdministradores()
+    __menuAdministrators()
 
 def __menuSubscriber():
 
@@ -251,22 +251,32 @@ def __menuRequestsMeters():
           "2) View Request Meter by ID.\n",
           "3) View Request Meter by ID of the subscriber.\n",
           "4) Back.")
+
     option = input("Select one option: ")
 
     if option == "1":
-        pass
+        print(__requestMeters)
 
     elif option == "2":
-        pass
+        id = int(input("Enter the ID of requests:\n"))
+
+        requests = __requestMeters.getRequestsMetersByID(id)
+
+        print(requests)
 
     elif option == "3":
-        pass
+        id = int(input("Enter the ID of subscriber:\n"))
+
+        requests = __requestMeters.getRequestsMetersByIDSubscribers(id)
+
+        print(requests)
 
     elif option == "4":
-        pass
+        __menuAdministrators()
     else:
         pass
 
+    __menuRequestsMeters()
 
 def __menuInspectors():
 
@@ -343,7 +353,7 @@ def menuApp():
 
         if state and admin:
 
-            __menuAdministradores()
+            __menuAdministrators()
 
         elif state and not admin:
             inspectorID = id

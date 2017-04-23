@@ -44,3 +44,43 @@ class RequestMeters:
         self.__idRequest += 1
         requestMeters = RequestMeter(self.__idRequest, idSubcriber, nameSubcriber, addres, telephone)
         self.__listRequestMeters.append(requestMeters)
+
+    def deleteRequestMeter(self, id):
+        i = 0
+        while i < len(self.__listRequestMeters):
+            if self.__listRequestMeters[i].getId() == int(id):
+                del self.__listRequestMeters[i]
+                break
+            i += 1
+
+    def getRequestsMetersByID(self, id):
+        for requests in self.__listRequestMeters:
+            if requests.getId() == int(id):
+                data = "{0}ID:{1} {2}" \
+                             " {0}ID Subscriber:{1} {2}" \
+                             " {0}Name:{1} {3}" \
+                             " {0}Addres:{1} {4}" \
+                             " {0}Telephone:{1} {5}\n".format(self.__colors.getBlue(),
+                                                              self.__colors.getWhite(),
+                                                              requests.getId(),
+                                                              requests.getFullname(),
+                                                              requests.getAddres(),
+                                                              requests.getTelephone(),
+                                                              requests.getIdSubcriber())
+                return data
+
+    def getRequestsMetersByIDSubscribers(self, id):
+        for requests in self.__listRequestMeters:
+            if requests.getIdSubcriber() == int(id):
+                data = "{0}ID:{1} {2}" \
+                             " {0}ID Subscriber:{1} {2}" \
+                             " {0}Name:{1} {3}" \
+                             " {0}Addres:{1} {4}" \
+                             " {0}Telephone:{1} {5}\n".format(self.__colors.getBlue(),
+                                                              self.__colors.getWhite(),
+                                                              requests.getId(),
+                                                              requests.getFullname(),
+                                                              requests.getAddres(),
+                                                              requests.getTelephone(),
+                                                              requests.getIdSubcriber())
+                return data
