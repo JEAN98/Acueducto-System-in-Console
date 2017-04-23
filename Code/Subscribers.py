@@ -87,3 +87,10 @@ class Subscribers:
                                                                                                     subscriber.getFullname(),
                                                                                                     subscriber.getAddres(),
                                                                                                     subscriber.getTelephone()))
+
+    def getSubscriber(self, id):
+
+        for subscriber in self.__listSubscribers:
+            if subscriber.getId() == id:
+                return subscriber
+
