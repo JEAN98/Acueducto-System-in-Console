@@ -7,10 +7,6 @@ import datetime
 from RequestMeters import RequestMeters
 
 
-requestList = [] #In this list we are going to save the request created by admin
- #in this list we are going to save the reads by inspectors
-inspectorID=""
-
 WaterMeter("2","222",0)
 WaterMeter("1","111",100)
 WaterMeter("205710037","1234",98)
@@ -287,7 +283,8 @@ def __menuInspectors():
                                                                                 __logIn.getUser().getFullName()),
           "1)Water meter installaion.\n",
           "2)Make reads water meter.\n",
-          "3) Exit.")
+          "3)View All Requests Meters.\n",
+          "4) Exit.")
 
     option = input("Select one option: ")
 
@@ -295,12 +292,13 @@ def __menuInspectors():
         #Water meter installaion
         # Serch if is in the list
         print("Write information for to install water meter!!")
-        for i in requestList:
+        for i in __requestMeters.getRequestsMeters():
+            print("Request: {}".format(__requestMeters.getRequestsMetersByID(i.getId())))
             waterMeterCode = input("Enter the water meter ID: ")
             amount = float(input("Enter the amount the water meter have: "))
-            WaterMeter(i.OwnerID,waterMeterCode,amount)
+            WaterMeter(i.getIdSubcriber(),waterMeterCode,amount)
+            __requestMeters.deleteRequestMeter(i.getId())
 
-        requestList.clear()
 
     elif option == "2":
         #Make reads water meter
@@ -314,11 +312,13 @@ def __menuInspectors():
             __menuInspectors()
         else:
             cubicsMeter = float(input("Enter the get cubic meter: "))
-            ReadsWaterMeter(cubicsMeter,waterMeterID,inspectorID)
+            ReadsWaterMeter(cubicsMeter,waterMeterID,__logIn.getUser().getId())
             print("Reading water meter added!!")
 
-
     elif option == "3":
+        print(__requestMeters)
+
+    elif option == "4":
 
         return
 

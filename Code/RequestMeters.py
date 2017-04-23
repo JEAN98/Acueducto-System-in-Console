@@ -53,6 +53,9 @@ class RequestMeters:
                 break
             i += 1
 
+    def getRequestsMeters(self):
+        return self.__listRequestMeters
+
     def getRequestsMetersByID(self, id):
         for requests in self.__listRequestMeters:
             if requests.getId() == int(id):
