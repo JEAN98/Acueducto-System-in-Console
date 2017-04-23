@@ -21,6 +21,7 @@ ReadsWaterMeter(300,"1234","2")
 
 
 def __askInformationReadings(number):
+    #Here we can ask the information any user and any times amount
 
     ID = input("Enter the water meter ID: ")
     reading = ReadsWaterMeter.searchReadWaterMeter(None, ID)
@@ -64,7 +65,8 @@ def __readsWaterMeterMenu():
 
 def __billingMenu():
 
-    adminName = __logIn.getUser().getFullName()
+    #Here we can to make payments and review pending invoices
+    adminName = __logIn.getUser().getFullName()  #Get the name of admin
     now = datetime.datetime.now()
     plantillaFecha = "{}/{}/{} {}:{}:{}"
     date = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
@@ -73,17 +75,15 @@ def __billingMenu():
     option = input("Enter a option: ")
     if option == "1":
         ownerID = input("Write the ownerID: ")
-        owner = __subscribers.getSubscriber(ownerID) #corrected
+        owner = __subscribers.getSubscriber(ownerID) #Get the object of owner
 
-        result = ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,0,"")
+        result = ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,0,"") #Get the pending invoices by client, if don't have the method return null
 
         if result != "null":
             print("Pending invoice in these waterMeter: " + result)
             print("\n1)Cancel all invoices\n","2)Cancel a specific invoice \n")
 
             option2 = input("Write the option: ")
-
-
 
             if option2 == "1":
                 print("*****Bill*****")
@@ -94,7 +94,7 @@ def __billingMenu():
             elif option2 =="2":
 
                 waterMeterID = input("Write the waterMeter ID: ")
-                verificationWaterMeter = WaterMeter.searchWaterMeter(None,waterMeterID)
+                verificationWaterMeter = WaterMeter.searchWaterMeter(None,waterMeterID) #Here we can verify if the watermeter wrote exist in system
 
                 if verificationWaterMeter == "":
                     print("The watermeterID wrote doesn't exist(xxxx)")
@@ -102,7 +102,7 @@ def __billingMenu():
 
                 else:
                     print("*****Bill*****")
-                    result = ReadsWaterMeter.PendingInvoicesByClient(None, ownerID, 1,waterMeterID)
+                    result = ReadsWaterMeter.PendingInvoicesByClient(None, ownerID, 1,waterMeterID) #Get the pending invoices by client, if don't have the method return null
                     if result != "null":
 
                         print("Owner ID: " + ownerID + "\nName: " + owner.fullname + "\nPaid readings in these water meters: "
