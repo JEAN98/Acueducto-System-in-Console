@@ -13,7 +13,6 @@ WaterMeter("2","222",0)
 WaterMeter("1","111",100)
 WaterMeter("205710037","1234",98)
 
-ReadsWaterMeter(100,"222","2")
 ReadsWaterMeter(150,"222","2")
 ReadsWaterMeter(250,"111","2")
 ReadsWaterMeter(300,"1234","2")

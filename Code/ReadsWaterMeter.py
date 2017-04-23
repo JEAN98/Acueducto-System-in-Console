@@ -99,19 +99,21 @@ class ReadsWaterMeter:
             if reading.waterMeterID == waterMeterID:
                 oldAmount = WaterMeter.getCubicMeters(None,reading.waterMeterID) #we need search the old amount,
 
+                if reading.cubicMeters > 80:
+                    price = (((reading.cubicMeters - oldAmount) - 80)*0.1)+4  #Determination of price
 
-                price = (((reading.cubicMeters - oldAmount) - 80)*0.1)+4  #Determination of price
+                    if number == 1:
+                       result = ReadsWaterMeter.updateStatus(None,reading.waterMeterID)   #Upadete Status
 
-                if number == 1:
-                   result = ReadsWaterMeter.updateStatus(None,reading.waterMeterID)   #Upadete Status
+                       if result:
+                        return price
 
-                   if result:
+                       else:
+                           return False #Payment had already been made
+
                     return price
-
-                   else:
-                       return False #Payment had already been made
-
-                return price
+                else:
+                    return 4
 
 
 
