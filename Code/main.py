@@ -83,7 +83,7 @@ def __billingMenu():
 
             if option2 == "1":
                 print("*****Bill*****")
-                print("Owner ID: "+ownerID +"\nName: "+ owner.fullname + "\nPaid readings in these water meters: "
+                print("Owner ID: "+ownerID +"\nName: "+ owner._Subscriber__fullname + "\nPaid readings in these water meters: "
                       +ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,1,"")+
                       "\nAdmin name: "+adminName + "\nDate Time: "+date +"\n")
 
@@ -101,7 +101,7 @@ def __billingMenu():
                     result = ReadsWaterMeter.PendingInvoicesByClient(None, ownerID, 1,waterMeterID) #Get the pending invoices by client, if don't have the method return null
                     if result != "null":
 
-                        print("Owner ID: " + ownerID + "\nName: " + owner.fullname + "\nPaid readings in these water meters: "
+                        print("Owner ID: " + ownerID + "\nName: " + owner._Subscriber__fullname + "\nPaid readings in these water meters: "
                           +  result +
                           "\nAdmin name: " + adminName + "\nDate Time: " + date + "\n")
                     else:
@@ -298,6 +298,8 @@ def __menuInspectors():
             amount = float(input("Enter the amount the water meter have: "))
             WaterMeter(i.getIdSubcriber(),waterMeterCode,amount)
             __requestMeters.deleteRequestMeter(i.getId())
+
+        print("Succesful installation!")
 
 
     elif option == "2":
