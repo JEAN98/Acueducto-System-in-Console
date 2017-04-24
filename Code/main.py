@@ -83,7 +83,7 @@ def __billingMenu():
 
             if option2 == "1":
                 print("*****Bill*****")
-                print("Owner ID: "+ownerID +"\nName: "+ owner._Subscriber__fullname + "\nPaid readings in these water meters: "
+                print("Owner ID: "+ownerID +"\nName: "+ owner.getFullname() + "\nPaid readings in these water meters: "
                       +ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,1,"")+
                       "\nAdmin name: "+adminName + "\nDate Time: "+date +"\n")
 
