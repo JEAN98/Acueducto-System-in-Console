@@ -2,9 +2,10 @@ from LogInSystem import LogInSystem
 from Colors import Colors
 from WaterMeter import WaterMeter
 from Subscribers import Subscribers
-from ReadsWaterMeter import ReadsWaterMeter
+from ReadsWaterMeter import *
 import datetime
 from RequestMeters import RequestMeters
+from Querys import Querys
 
 
 WaterMeter("2","222",0)
@@ -12,7 +13,7 @@ WaterMeter("1","111",100)
 WaterMeter("205710037","1234",98)
 
 ReadsWaterMeter(150,"222","2")
-ReadsWaterMeter(250,"111","2")
+ReadsWaterMeter(250,"222","2")
 ReadsWaterMeter(300,"1234","2")
 
 
@@ -152,7 +153,7 @@ def __menuAdministrators():
 
     elif option == "5":
 
-        print("option#5")
+        __menuQuerys()
 
     elif option == "7":
 
@@ -273,6 +274,23 @@ def __menuRequestsMeters():
         pass
 
     __menuRequestsMeters()
+
+def __menuQuerys():
+    print("{0}********QUERYS MENU ********{2}   ID: {3} User: {4}{1}\n".format(__colors.getBlue(),
+                                                                                    __colors.getWhite(),
+                                                                                    __colors.getOrange(),
+                                                                                    __logIn.getUser().getId(),
+                                                                                    __logIn.getUser().getFullName()),
+          "1) List of Defaulters.\n",
+          "2) Modify Subscriber.\n",
+          "3) Delete Subscriber.\n",
+          "4) View All Subscribers.\n",
+          "5) View Subcribers by ID.\n",
+          "6) Back.")
+    option = input("Select one option: ")
+
+    if option == "1":
+        print(__querys.getListDefaulters(readsWaterMeterList, waterMeterList))
 
 def __menuInspectors():
 
@@ -398,4 +416,5 @@ __logIn = LogInSystem()
 __colors = Colors()
 __subscribers = Subscribers()
 __requestMeters = RequestMeters()
+__querys = Querys()
 menuApp()

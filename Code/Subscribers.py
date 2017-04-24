@@ -28,7 +28,6 @@ class Subscribers:
 
         self.__listSubscribers.append(Subscriber(id, fullName, addres, telephone))
 
-
     def modifySubscribers(self, oldId, id , fullName, addres, telephone):
         """Modify a user in the list subscribers.
         You need old, identification, full name, addres, telephone."""
@@ -59,7 +58,6 @@ class Subscribers:
                 return copyName
 
             i += 1
-
 
     def sortedList(self):
         'Sort the list subscribers'

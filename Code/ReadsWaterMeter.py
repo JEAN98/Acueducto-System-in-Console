@@ -1,6 +1,8 @@
 import  datetime
 from WaterMeter import *
+
 readsWaterMeterList = []
+
 class ReadsWaterMeter:
 
     def __init__(self,cubicMeters,waterMeterID,inspectorID):
@@ -16,7 +18,8 @@ class ReadsWaterMeter:
         self.lastModified = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
         readsWaterMeterList.append(self)
 
-
+    def getReadsWaterMeter(self):
+        return readsWaterMeterList
 
     def updateReadsWaterMeter(self,ID,cubicMeters):
         #Here can update reads
