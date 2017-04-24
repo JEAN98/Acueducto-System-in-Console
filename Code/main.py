@@ -102,7 +102,7 @@ def __billingMenu():
                     result = ReadsWaterMeter.PendingInvoicesByClient(None, ownerID, 1,waterMeterID) #Get the pending invoices by client, if don't have the method return null
                     if result != "null":
 
-                        print("Owner ID: " + ownerID + "\nName: " + owner._Subscriber__fullname + "\nPaid readings in these water meters: "
+                        print("Owner ID: " + ownerID + "\nName: " + owner.getFullname() + "\nPaid readings in these water meters: "
                           +  result +
                           "\nAdmin name: " + adminName + "\nDate Time: " + date + "\n")
                     else:
