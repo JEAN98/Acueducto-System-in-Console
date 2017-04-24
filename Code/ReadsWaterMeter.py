@@ -167,3 +167,13 @@ class ReadsWaterMeter:
 
     def getListConsumeWater(self):
         return waterPayConsume
+
+    def getListPendingPayment(self):
+        #Here we can get the list that is pending to pay
+
+        peindingList = []
+        for reading in readsWaterMeterList:
+            if reading.status == False:
+                peindingList.append(reading)
+
+        return  peindingList
