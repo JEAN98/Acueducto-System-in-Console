@@ -7,14 +7,15 @@ import datetime
 from RequestMeters import RequestMeters
 from Querys import Querys
 
-
+           #Owner,Code,amount
 WaterMeter("2","222",0)
 WaterMeter("1","111",100)
 WaterMeter("205710037","1234",98)
-
+                #Amount , Code, Inspector
 ReadsWaterMeter(150,"222","2")
 ReadsWaterMeter(250,"222","2")
-ReadsWaterMeter(300,"1234","2")
+ReadsWaterMeter(300,"111","2")
+ReadsWaterMeter(60,"1234","2")
 
 
 def __askInformationReadings(number):
@@ -60,6 +61,52 @@ def __readsWaterMeterMenu():
 
     __readsWaterMeterMenu()
 
+def askInforAboutBilling(owner,ownerID,adminName,date):
+    resultPending = ReadsWaterMeter.PendingInvoicesByClient(None,ownerID)  # Get the pending invoices by client, if don't have the method return null
+
+    if resultPending != "null":
+        print("Pending invoice in these waterMeter: " + resultPending)
+        print("\n1)Cancel all invoices\n", "2)Cancel a specific invoice \n", "3)Return")
+
+        option2 = input("Write the option: ")
+
+        if option2 == "1":
+            ReadsWaterMeter.PayWater(None, "")  # Pay all readings
+            print("*****Bill*****")
+            print("Owner ID: " + ownerID + "\nName: " + owner.getFullname() +
+                  "\nPaid readings in these water meters: " + resultPending +
+                  "\nAdmin name: " + adminName + "\nDate Time: " + date + "\n")
+
+        elif option2 == "2":  # Pay one reading
+
+            waterMeterID = input("Write the waterMeter ID: ")
+            verificationWaterMeter = WaterMeter.searchWaterMeter(None,
+                                                                 waterMeterID)  # Here we can verify if the watermeter wrote exist in system
+
+            if verificationWaterMeter == "":
+                print("The watermeterID wrote doesn't exist(xxxx)")
+                __billingMenu()
+
+            else:
+                print("*****Bill*****")
+                resultPayment = ReadsWaterMeter.PayWater(None,
+                                                         waterMeterID)  # Get the pending invoices by client, if don't have the method return null
+                if resultPayment:
+
+                    print("Owner ID: " + ownerID + "\nName: " + owner.getFullname() +
+                          "\nPaid reading in this water meter: " + resultPayment +
+                          "\nAdmin name: " + adminName + "\nDate Time: " + date + "\n")
+                else:
+                    print("Payment had already been made")
+        elif option2 == "3":
+            return
+
+        else:
+            print("Character not defined!!")
+
+    else:
+        print("There are no pending readings!!")
+
 def __billingMenu():
 
     #Here we can to make payments and review pending invoices
@@ -73,44 +120,10 @@ def __billingMenu():
     if option == "1":
         ownerID = input("Write the ownerID: ")
         owner = __subscribers.getSubscriber(ownerID) #Get the object of owner
-
-        result = ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,0,"") #Get the pending invoices by client, if don't have the method return null
-
-        if result != "null":
-            print("Pending invoice in these waterMeter: " + result)
-            print("\n1)Cancel all invoices\n","2)Cancel a specific invoice \n")
-
-            option2 = input("Write the option: ")
-
-            if option2 == "1":
-                print("*****Bill*****")
-                print("Owner ID: "+ownerID +"\nName: "+ owner.getFullname() + "\nPaid readings in these water meters: "
-                      +ReadsWaterMeter.PendingInvoicesByClient(None,ownerID,1,"")+
-                      "\nAdmin name: "+adminName + "\nDate Time: "+date +"\n")
-
-            elif option2 =="2":
-
-                waterMeterID = input("Write the waterMeter ID: ")
-                verificationWaterMeter = WaterMeter.searchWaterMeter(None,waterMeterID) #Here we can verify if the watermeter wrote exist in system
-
-                if verificationWaterMeter == "":
-                    print("The watermeterID wrote doesn't exist(xxxx)")
-                    __billingMenu()
-
-                else:
-                    print("*****Bill*****")
-                    result = ReadsWaterMeter.PendingInvoicesByClient(None, ownerID, 1,waterMeterID) #Get the pending invoices by client, if don't have the method return null
-                    if result != "null":
-
-                        print("Owner ID: " + ownerID + "\nName: " + owner.getFullname() + "\nPaid readings in these water meters: "
-                          +  result +
-                          "\nAdmin name: " + adminName + "\nDate Time: " + date + "\n")
-                    else:
-                        print("Payment had already been made")
-        else:
-            print("There are no pending readings!!")
+        askInforAboutBilling(owner,ownerID,adminName,date)
 
     elif option == "2":
+
         return
     else:
         print("(xxxxx)Character incorrect\n")

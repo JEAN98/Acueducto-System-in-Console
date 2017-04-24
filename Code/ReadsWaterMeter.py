@@ -2,6 +2,7 @@ import  datetime
 from WaterMeter import *
 
 readsWaterMeterList = []
+waterPayConsume =[]
 
 class ReadsWaterMeter:
 
@@ -16,7 +17,12 @@ class ReadsWaterMeter:
 
         self.period = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
         self.lastModified = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
+        self.price = 0
         readsWaterMeterList.append(self)
+
+
+        ReadsWaterMeter.calculatePrice(self)
+        WaterMeter.updateCubicMeters(None,waterMeterID,cubicMeters)
 
     def getReadsWaterMeter(self):
         return readsWaterMeterList
@@ -83,45 +89,55 @@ class ReadsWaterMeter:
 
 
 
-    def updateStatus(self, waterMeterID):
+    def PayWater(self,waterMeterID):
         #In this method the admin can to make payments
+        price=0
         for i in readsWaterMeterList:
-            if waterMeterID == i.waterMeterID:
+            if waterMeterID == "": #If USER is going to pay all
                 if i.status == False:
-                    i.status = True
-                    WaterMeter.updateCubicMeters(None,i.waterMeterID,i.cubicMeters)
-                    return True #Payment already
-                else:
-                    return False #Payment had already been made
+
+                    i.status = True #Payment ready
+                    WaterMeter.updateCubicMeters(None, i.waterMeterID, i.cubicMeters)
+                    waterPayConsume.append(i)
+
+
+            elif waterMeterID == i.waterMeterID: #If USER is going to pay one reading
+
+                if i.status == False:
+
+                    i.status = True #Payment ready
+                    WaterMeter.updateCubicMeters(None, i.waterMeterID, i.cubicMeters)
+                    waterPayConsume.append(i)
+                    price += i.price
+
+        return "Total price: " + str(i.price)
 
 
 
-    def calculateInvoice(self,waterMeterID,number):
+
+
+    def calculatePrice(self):
 
         for reading in readsWaterMeterList:
-            if reading.waterMeterID == waterMeterID:
-                oldAmount = WaterMeter.getCubicMeters(None,reading.waterMeterID) #we need search the old amount,
+            if reading == self:
+                oldAmount = WaterMeter.getRecentCubicMeters(None,reading.waterMeterID) #we need search the old amount,
 
-                if reading.cubicMeters > 80:
+
+                if reading.cubicMeters - oldAmount > 80:
+
                     price = (((reading.cubicMeters - oldAmount) - 80)*0.1)+4  #Determination of price
+                    reading.price = price
+                    return
 
-                    if number == 1:
-                       result = ReadsWaterMeter.updateStatus(None,reading.waterMeterID)   #Upadete Status
-
-                       if result:
-                        return price
-
-                       else:
-                           return False #Payment had already been made
-
-                    return price
                 else:
-                    return 4
+
+                    reading.price = 4
+                    return
 
 
 
-    def PendingInvoicesByClient(self,ownerID,key,WaterMeterID): #key=1 payment, key=2 no payment
 
+    def PendingInvoicesByClient(self,ownerID):
 
         waterMeterListbyOwner = WaterMeter.getWaterMetersByOwner(None,ownerID)
         # Make a string that let us know the waterMeters pending for pay in our system
@@ -132,34 +148,22 @@ class ReadsWaterMeter:
         # The method search by ownerID, and then search all his watermeter that they need be payed
         for i in waterMeterListbyOwner:
             for j in readsWaterMeterList:
-                if WaterMeterID != "":
-                    if j.waterMeterID == WaterMeterID:
 
-                        resultPendigInvoices += str(j.waterMeterID)
-                        readingPrice = ReadsWaterMeter.calculateInvoice(None,j.waterMeterID, key) #pay one
+                if j.waterMeterID == i.waterMeterID and j.status == False:
+                    if cont > 0:
+                        resultPendigInvoices += " , "  # Add character
 
-                        if readingPrice == False:
-                            return "null"
+                    resultPendigInvoices += "ID " + str(j.waterMeterID) + " $"+str(j.price)
+                    totalPrice += j.price #Accumulated from all debts
+                    cont += 1
 
-                        else:
-                            resultPendigInvoices += " $ "+str(readingPrice)
-                            totalPrice += readingPrice
-                            return resultPendigInvoices + "\nTotal price: $" + str(totalPrice)
-
-
-
-                if j.waterMeterID == i.waterMeterID:
-                    if j.status == False:
-                        if cont > 0:
-                            resultPendigInvoices += " , " #Add character
-
-                        resultPendigInvoices += "Water meter ID "+ str(j.waterMeterID)
-                        readingPrice = ReadsWaterMeter.calculateInvoice(None,j.waterMeterID, key) #Get the price for every reading and if key == 1 pay all
-                        resultPendigInvoices += " $"+str(readingPrice)
-                        totalPrice += readingPrice
-                        cont += 1
         if cont > 0:
             return resultPendigInvoices + "\nTotal price: $" + str(totalPrice)
 
         else:
             return "null"
+
+
+
+    def getListConsumeWater(self):
+        return waterPayConsume

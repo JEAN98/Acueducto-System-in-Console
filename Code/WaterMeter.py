@@ -7,13 +7,15 @@ class WaterMeter:
            self.waterMeterID = waterMeterID
            self.OwnerID = OwnerID #Get in requestList
            self.amount = amount
+           self.newAmount = amount #Let us to save the recent reading
            waterMeterList.append(self)
 
        def updateCubicMeters(self, ID,newAmount):
            #Here we can Update the cubicMeters
           for i in waterMeterList:
                if ID == i.waterMeterID:
-                    i.amount = newAmount
+                    i.newAmount = newAmount
+                    return
 
 
        def searchWaterMeter(self,waterMeterID):
@@ -22,13 +24,13 @@ class WaterMeter:
                    return waterMeterID
            return ""
 
-       def getCubicMeters(self,ID):
+       def getRecentCubicMeters(self,ID):
             for i in waterMeterList:
                 if ID == i.waterMeterID:
-                    return i.amount
+                    return i.newAmount
 
        def getWaterMetersByOwner(self,ownerID):
-           waterMeterByOwnerList =[]
+           waterMeterByOwnerList = []
            for waterMeter in waterMeterList:
                if waterMeter.OwnerID == ownerID:
                    waterMeterByOwnerList.append(waterMeter)
