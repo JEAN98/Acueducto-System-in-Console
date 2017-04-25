@@ -316,16 +316,33 @@ def __menuQuerys():
                                                                                     __logIn.getUser().getId(),
                                                                                     __logIn.getUser().getFullName()),
           "1) List of Defaulters.\n",
-          "2) Modify Subscriber.\n",
-          "3) Delete Subscriber.\n",
-          "4) View All Subscribers.\n",
-          "5) View Subcribers by ID.\n",
-          "6) Back.")
+          "2) Top 10 water consumption.\n",
+          "3) Top 10 Payments.\n",
+          "4) Average consumption in the last 6 months..\n",
+          "5) Back.\n")
+
     option = input("Select one option: ")
 
     if option == "1":
         result = ReadsWaterMeter.getDelinquentList(None)
         print(__querys.getListDefaulters(result))
+
+    elif option == "2":
+        result = ReadsWaterMeter.getReadsWaterMeter(None)
+        print(__querys.getListConsumption(result))
+    elif option == "3":
+        result = ReadsWaterMeter.getListConsumeWater(None)
+        print(__querys.getListConsumption(result))
+
+    elif option == "5":
+        __menuAdministrators()
+
+    else:
+
+        print("{}The option is incorrect{}\n".format(__colors.getRed(),
+                                                     __colors.getWhite()))
+
+    __menuQuerys()
 
 def __menuInspectors():
 

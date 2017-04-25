@@ -17,3 +17,15 @@ class Defaulter(Subscriber):
 
     def getNumReads(self):
         return len(self.__readingList)
+
+    def getConsumption(self):
+        consumption = 0
+        for read in self.__readingList:
+            consumption += read.price
+
+        if len(self.__readingList) > 0:
+            consumption /= len(self.__readingList)
+        else:
+            return 0
+
+        return consumption
