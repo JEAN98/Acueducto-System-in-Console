@@ -1,5 +1,7 @@
 import  datetime
 from WaterMeter import *
+from Subscribers import Subscribers
+from Colors import Colors
 
 readsWaterMeterList = []
 waterPayConsume = []
@@ -7,13 +9,13 @@ waterPayConsume = []
 
 class ReadsWaterMeter:
 
-    def __init__(self,cubicMeters,waterMeterID,inspectorID):
+    def __init__(self,cubicMeters,waterMeterID,inspectorID,status):
 
         self.ownerID = WaterMeter.searchOwner(None,waterMeterID)
         self.readingID = len(readsWaterMeterList) + 1
         self.waterMeterID = waterMeterID  #waterMeter is a object
         self.inpesctorID = inspectorID
-        self.status = False  #(False) = Pending and True =  Pay Ready
+        self.status = status  #(False) = Pending and True =  Pay Ready
         self.cubicMeters = cubicMeters
         now = datetime.datetime.now()
         plantillaFecha = "{}/{}/{} {}:{}:{}"
@@ -21,8 +23,8 @@ class ReadsWaterMeter:
         self.period = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
         self.lastModified = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
         self.price = 0
+        self.colors = Colors()
         readsWaterMeterList.append(self)
-
 
         ReadsWaterMeter.calculatePrice(self)
         WaterMeter.updateCubicMeters(None,waterMeterID,cubicMeters)
@@ -138,17 +140,21 @@ class ReadsWaterMeter:
 
                     price = (((reading.cubicMeters - oldAmount) - 80)*0.1)+4  #Determination of price
                     reading.price = price
+                    if self.status == True:
+                        waterPayConsume.append(self) #Add item of list of pay conume
                     return
 
                 else:
 
                     reading.price = 4
+                    if self.status == True:
+                        waterPayConsume.append(reading)#Add item of list of pay consume
                     return
 
 
-    def PendingInvoicesByClient(self,ownerID):
+    def PendingInvoicesByClient(self,owner):
 
-        waterMeterListbyOwner = WaterMeter.getWaterMetersByOwner(None,ownerID)
+        waterMeterListbyOwner = WaterMeter.getWaterMetersByOwner(None,str(owner.getId()))
         # Make a string that let us know the waterMeters pending for pay in our system
         resultPendigInvoices = " "
         totalPrice = 0
@@ -166,6 +172,31 @@ class ReadsWaterMeter:
                     totalPrice += j.price #Accumulated from all debts
                     cont += 1
 
+                    priceByOne= "$"+ str(j.price)
+
+                   # resultPendigInvoices +=  "{8}----------------------------------------------------------------------------------------------" \
+                    #"-------------------------------------------------------------------------------------------------{1}\n" \
+                    #"{7}) {0}Id Subscriber:{1} {2}" \
+                    #" {0}Name Subscriber:{1} {3}" \
+                    #" {0}Adrres:{1} {3}" \
+                    #" {0}ReadingID:{1} {4}" \
+                    #" {0}WaterMeterID:{1} {4}" \
+                    #" {0}Amount:{1} {5}" \
+                    #" {0}InspectorID:{1} {6}\n".format(j.colors.getBlue(),
+                     ##                             j.colors.getWhite(),
+                      #                            j.ownerID,
+                       #                           owner.getFullname(),
+                        #                          owner.getAddres(),
+                        #                          j.readingID,
+                         #                         j.waterMeterID,
+                          #                        priceByOne,
+                                   #               j.inpesctorID,
+                                    #              j.colors.getGreen())
+
+
+
+
+
         if cont > 0:
             return resultPendigInvoices + "\nTotal price: $" + str(totalPrice)
 
@@ -182,6 +213,15 @@ class ReadsWaterMeter:
 
         return OwnerPendingList
 
+    def getReadsByOwnerPayment(self,OwnerID):
+        OwnerPaymentList = []
+        for reading in readsWaterMeterList:
+            if reading.ownerID == OwnerID:
+                if reading.status == True:
+                    OwnerPaymentList.append(reading)
+
+        return OwnerPaymentList
+
     def getDelinquentList(self): #1 item
         #Here we can get the list that is pending to pay
         peindingList = []
@@ -192,7 +232,7 @@ class ReadsWaterMeter:
         return peindingList
 
 
-    def getListConsumeWater(self): # 2 y 3 Item
+    def getListConsumeWater(self): # 3 Item
         return waterPayConsume
 
 

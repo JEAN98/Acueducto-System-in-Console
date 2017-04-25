@@ -11,11 +11,26 @@ from Querys import Querys
 WaterMeter("2","222",0)
 WaterMeter("1","111",100)
 WaterMeter("205710037","1234",98)
+
+
                 #Amount , Code, Inspector
-ReadsWaterMeter(150,"222","2")
-ReadsWaterMeter(250,"222","2")
-ReadsWaterMeter(300,"111","2")
-ReadsWaterMeter(60,"1234","2")
+ReadsWaterMeter(150,"222","2",False)
+ReadsWaterMeter(250,"222","2",False)
+ReadsWaterMeter(300,"111","2",False)
+ReadsWaterMeter(500,"111","2",False)
+ReadsWaterMeter(700,"111","2",False)
+ReadsWaterMeter(60,"1234","2",False)
+
+ReadsWaterMeter(60,"1234","2",True)
+ReadsWaterMeter(90,"1234","2",True)
+ReadsWaterMeter(280,"1234","2",True)
+ReadsWaterMeter(500,"111","2",True)
+ReadsWaterMeter(500,"111","2",True)
+
+ReadsWaterMeter(780,"222","2",True)
+ReadsWaterMeter(820,"222","2",True)
+ReadsWaterMeter(1000,"222","2",True)
+
 
 
 def __askInformationReadings(number):
@@ -64,7 +79,7 @@ def __readsWaterMeterMenu():
     __readsWaterMeterMenu()
 
 def askInforAboutBilling(owner,ownerID,adminName,date):
-    resultPending = ReadsWaterMeter.PendingInvoicesByClient(None,ownerID)  # Get the pending invoices by client, if don't have the method return null
+    resultPending = ReadsWaterMeter.PendingInvoicesByClient(None,owner)  # Get the pending invoices by client, if don't have the method return null
 
     if resultPending != "null":
         print("Pending invoice in these waterMeter: " + resultPending)
@@ -384,7 +399,7 @@ def __menuInspectors():
             __menuInspectors()
         else:
             cubicsMeter = float(input("Enter the get cubic meter: "))
-            ReadsWaterMeter(cubicsMeter,waterMeterID,__logIn.getUser().getId())
+            ReadsWaterMeter(cubicsMeter,waterMeterID,__logIn.getUser().getId(),False)
             print("Reading water meter added!!")
 
     elif option == "3":

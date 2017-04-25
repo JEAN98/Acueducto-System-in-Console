@@ -79,7 +79,7 @@ class Querys:
                                               subriber.getAddres(),
                                               subriber. getTelephone(),
                                               self.calcAmount(read.ownerID),
-                                              ReadsWaterMeter.getReadsByOwner(None,read.ownerID))
+                                              ReadsWaterMeter.getReadsByOwnerPayment(None,read.ownerID))
                         self.__listDefaulters.append(defaulter)
 
         self.__listDefaulters = sorted(self.__listDefaulters, key= lambda defaulter: (defaulter.getConsumption(), defaulter.getpriceTotal()))
@@ -143,7 +143,7 @@ class Querys:
 
     def calcAmount(self, idSubscriber):
         amount = 0
-        OwnerList = ReadsWaterMeter.getReadsByOwner(None, idSubscriber)
+        OwnerList = ReadsWaterMeter.getReadsByOwnerPayment(None, idSubscriber)
         for object in OwnerList:
             amount += object.price
 
