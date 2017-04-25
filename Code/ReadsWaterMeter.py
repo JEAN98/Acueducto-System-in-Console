@@ -25,8 +25,6 @@ class ReadsWaterMeter:
         ReadsWaterMeter.calculatePrice(self)
         WaterMeter.updateCubicMeters(None,waterMeterID,cubicMeters)
 
-    def getReadsWaterMeter(self):
-        return readsWaterMeterList
 
     def updateReadsWaterMeter(self,readingID,cubicMeters):
         #Here can update reads
@@ -170,11 +168,7 @@ class ReadsWaterMeter:
             return "null"
 
 
-
-    def getListConsumeWater(self):
-        return waterPayConsume
-
-    def getListPendingPayment(self):
+    def getDelinquentList(self): #1 item
         #Here we can get the list that is pending to pay
 
         peindingList = []
@@ -182,4 +176,12 @@ class ReadsWaterMeter:
             if reading.status == False:
                 peindingList.append(reading)
 
-        return  peindingList
+        return peindingList
+
+
+    def getListConsumeWater(self): # 2 y 3 Item
+        return waterPayConsume
+
+
+    def getReadsWaterMeter(self): #3 item
+        return readsWaterMeterList
