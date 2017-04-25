@@ -2,12 +2,13 @@ import  datetime
 from WaterMeter import *
 
 readsWaterMeterList = []
-waterPayConsume =[]
+waterPayConsume = []
 
 class ReadsWaterMeter:
 
     def __init__(self,cubicMeters,waterMeterID,inspectorID):
 
+        self.readingID = len(readsWaterMeterList) + 1
         self.waterMeterID = waterMeterID  #waterMeter is a object
         self.inpesctorID = inspectorID
         self.status = False  #(False) = Pending and True =  Pay Ready
@@ -27,12 +28,12 @@ class ReadsWaterMeter:
     def getReadsWaterMeter(self):
         return readsWaterMeterList
 
-    def updateReadsWaterMeter(self,ID,cubicMeters):
+    def updateReadsWaterMeter(self,readingID,cubicMeters):
         #Here can update reads
         now = datetime.datetime.now()
         plantillaFecha = "{}/{}/{} {}:{}:{}"
         for i in readsWaterMeterList:
-            if i.waterMeterID == ID:
+            if i.readingID == readingID:
                 i.cubicMeters = cubicMeters
                 i.lastModified = plantillaFecha.format(now.day, now.month, now.year, now.hour, now.minute, now.second)
 
@@ -44,8 +45,7 @@ class ReadsWaterMeter:
     def printReadWaterMeter(self):
         #Here we can print a readWaterMeter
 
-        print("\n***Reading in ID: "+ str(self.waterMeterID)+"***"+"\n"+
-              "InspectorID: "+self.inpesctorID)
+        print("\n***Reading ID: "+ str(self.readingID)+" ***\n"+ "WaterMeterID: "+ str(self.waterMeterID)+"\nInspectorID: "+ str(self.inpesctorID))
         if self.status == False:
             print("Status: Pending payment")
         else:
@@ -63,20 +63,20 @@ class ReadsWaterMeter:
             ReadsWaterMeter.printReadWaterMeter(reading)   #Call method in same class that can to print little by little
 
 
-    def printReadingWaterMeter(self,waterMeterID):
+    def printReadingByWaterMeter(self,waterMeterID):
         # Here we can print a readingWaterMeter
-
         for reading in readsWaterMeterList:
             if reading.waterMeterID == waterMeterID:
                 ReadsWaterMeter.printReadWaterMeter(reading) # Call method in same class that can to print
 
 
-    def searchReadWaterMeter(self, waterMeterID):
+    def searchReadWaterMeter(self, readingID):
         #In this method can search a reading of any water meter
 
        for i in readsWaterMeterList:
-           if waterMeterID == i.waterMeterID:
+           if readingID == i.readingID:
                 return i
+
        return 0   #If this method can to return 0 is because does not exist
 
 

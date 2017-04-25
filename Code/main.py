@@ -21,7 +21,7 @@ ReadsWaterMeter(60,"1234","2")
 def __askInformationReadings(number):
     #Here we can ask the information any user and any times amount
 
-    ID = input("Enter the water meter ID: ")
+    ID = int(input("Enter the reading ID: "))
     reading = ReadsWaterMeter.searchReadWaterMeter(None, ID)
 
     if reading == 0:
@@ -29,11 +29,13 @@ def __askInformationReadings(number):
         print("")
         __askInformationReadings(number)
     else:
-       if number =="2":
+       if number == "2":
+           #Update
           cubicMeters = int(input("Enter the amount in cubic meter: "))
           ReadsWaterMeter.updateReadsWaterMeter(None,ID,cubicMeters)
 
-       elif number=="3":
+       elif number == "3":
+           ##Delete
            ReadsWaterMeter.deleteReadsWaterMeter(reading)
 
     return
