@@ -87,24 +87,28 @@ class ReadsWaterMeter:
 
 
 
-    def PayWater(self,waterMeterID):
+    def PayWater(self,ownerID,waterMeterID):
+        waterMeterListbyOwner = WaterMeter.getWaterMetersByOwner(None, ownerID)
         #In this method the admin can to make payments
         price=0
         for i in readsWaterMeterList:
-            if waterMeterID == "": #If USER is going to pay all
-                if i.status == False:
+            for j in waterMeterListbyOwner:
+                if i.waterMeterID == j.waterMeterID:
 
-                    i.status = True #Payment ready
-                    waterPayConsume.append(i)
+                    if waterMeterID == "": #If USER is going to pay all
+                        if i.status == False:
+
+                            i.status = True #Payment ready
+                            waterPayConsume.append(i)
 
 
-            elif waterMeterID == i.waterMeterID: #If USER is going to pay one reading
+                    elif waterMeterID == i.waterMeterID: #If USER is going to pay one reading
 
-                if i.status == False:
+                        if i.status == False:
 
-                    i.status = True #Payment ready
-                    waterPayConsume.append(i)
-                    price += i.price
+                            i.status = True #Payment ready
+                            waterPayConsume.append(i)
+                            price += i.price
 
         return "Total price: " + str(i.price)
 
@@ -115,6 +119,7 @@ class ReadsWaterMeter:
             if readingID == i.readingID:  # If USER is going to pay all
                 if i.status == False:
                     i.status = True
+                    waterPayConsume.append(i)
                     return i.price
 
 
@@ -157,7 +162,7 @@ class ReadsWaterMeter:
 
                     resultPendigInvoices += "\n"  # Add character
 
-                    resultPendigInvoices += "ReadingID "+str(j.readingID)+"   WaterMeterID " + str(j.waterMeterID) + "   $"+str(j.price)
+                    resultPendigInvoices += "ReadingID "+str(j.readingID)+"   WaterMeterID "+str(j.waterMeterID)+"  $"+str(j.price)
                     totalPrice += j.price #Accumulated from all debts
                     cont += 1
 

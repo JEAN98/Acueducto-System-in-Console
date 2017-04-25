@@ -73,7 +73,7 @@ def askInforAboutBilling(owner,ownerID,adminName,date):
         option2 = input("Write the option: ")
 
         if option2 == "1":
-            ReadsWaterMeter.PayWater(None, "")  # Pay all readings
+            ReadsWaterMeter.PayWater(None,ownerID ,"")  # Pay all readings
             print("*****Bill*****")
             print("Owner ID: " + ownerID + "\nName: " + owner.getFullname() +
                   "\nPaid readings in these water meters: " + resultPending +
@@ -91,8 +91,7 @@ def askInforAboutBilling(owner,ownerID,adminName,date):
 
             else:
                 print("*****Bill*****")
-                resultPayment = ReadsWaterMeter.PayWater(None,
-                                                         waterMeterID)  # Get the pending invoices by client, if don't have the method return null
+                resultPayment = ReadsWaterMeter.PayWater(None,ownerID,waterMeterID)  # Get the pending invoices by client, if don't have the method return null
                 if resultPayment:
 
                     print("Owner ID: " + ownerID + "\nName: " + owner.getFullname() +
