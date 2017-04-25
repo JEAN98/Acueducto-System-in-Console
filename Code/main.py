@@ -68,7 +68,7 @@ def askInforAboutBilling(owner,ownerID,adminName,date):
 
     if resultPending != "null":
         print("Pending invoice in these waterMeter: " + resultPending)
-        print("\n1)Cancel all invoices\n", "2)Cancel a specific invoice \n", "3)Return")
+        print("\n1)Cancel all invoices\n", "2)Cancel a specific invoice by waterMeterID \n", "3) Cancel a specific invoice by readingID\n","4)Return")
 
         option2 = input("Write the option: ")
 
@@ -100,9 +100,29 @@ def askInforAboutBilling(owner,ownerID,adminName,date):
                           "\nAdmin name: " + adminName + "\nDate Time: " + date + "\n")
                 else:
                     print("Payment had already been made")
+
+
+
+
+        elif option2 == "3":
+
+            readingID = int(input("Enter the readingID: "))
+            result = ReadsWaterMeter.searchReadWaterMeter(None,readingID)
+
+            if result != 0:
+                ReadsWaterMeter.PayWaterByReadingID(None,readingID)
+                print("\n*****Bill*****")
+                print("Owner ID: " + ownerID + "\nName: " + owner.getFullname() +
+                      "\nReadingID: " + str(result.readingID) +
+                      "\nPaid reading in this water meter: " + result.waterMeterID +
+                      "\nTotal price: "+str(result.price)+
+                      "\nAdmin name: " + adminName + "\nDate Time: " + date + "\n")
+            else:
+                print("ID does'nt exist!")
+
+
         elif option2 == "3":
             return
-
         else:
             print("Character not defined!!")
 

@@ -97,7 +97,6 @@ class ReadsWaterMeter:
                 if i.status == False:
 
                     i.status = True #Payment ready
-                    WaterMeter.updateCubicMeters(None, i.waterMeterID, i.cubicMeters)
                     waterPayConsume.append(i)
 
 
@@ -106,12 +105,19 @@ class ReadsWaterMeter:
                 if i.status == False:
 
                     i.status = True #Payment ready
-                    WaterMeter.updateCubicMeters(None, i.waterMeterID, i.cubicMeters)
                     waterPayConsume.append(i)
                     price += i.price
 
         return "Total price: " + str(i.price)
 
+
+    def PayWaterByReadingID(self,readingID):
+
+        for i in readsWaterMeterList:
+            if readingID == i.readingID:  # If USER is going to pay all
+                if i.status == False:
+                    i.status = True
+                    return i.price
 
 
 
@@ -150,10 +156,10 @@ class ReadsWaterMeter:
             for j in readsWaterMeterList:
 
                 if j.waterMeterID == i.waterMeterID and j.status == False:
-                    if cont > 0:
-                        resultPendigInvoices += " , "  # Add character
 
-                    resultPendigInvoices += "ID " + str(j.waterMeterID) + " $"+str(j.price)
+                    resultPendigInvoices += "\n"  # Add character
+
+                    resultPendigInvoices += "ReadingID "+str(j.readingID)+"   WaterMeterID " + str(j.waterMeterID) + "   $"+str(j.price)
                     totalPrice += j.price #Accumulated from all debts
                     cont += 1
 
