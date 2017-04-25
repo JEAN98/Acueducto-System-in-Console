@@ -4,10 +4,12 @@ from WaterMeter import *
 readsWaterMeterList = []
 waterPayConsume = []
 
+
 class ReadsWaterMeter:
 
     def __init__(self,cubicMeters,waterMeterID,inspectorID):
 
+        self.ownerID = WaterMeter.searchOwner(None,waterMeterID)
         self.readingID = len(readsWaterMeterList) + 1
         self.waterMeterID = waterMeterID  #waterMeter is a object
         self.inpesctorID = inspectorID
@@ -144,8 +146,6 @@ class ReadsWaterMeter:
                     return
 
 
-
-
     def PendingInvoicesByClient(self,ownerID):
 
         waterMeterListbyOwner = WaterMeter.getWaterMetersByOwner(None,ownerID)
@@ -172,10 +172,18 @@ class ReadsWaterMeter:
         else:
             return "null"
 
+    def getReadsByOwner(self,OwnerID):
+
+        OwnerPendingList = []
+        for reading in readsWaterMeterList:
+            if reading.ownerID == OwnerID:
+                if reading.status == False:
+                    OwnerPendingList.append(reading)
+
+        return OwnerPendingList
 
     def getDelinquentList(self): #1 item
         #Here we can get the list that is pending to pay
-
         peindingList = []
         for reading in readsWaterMeterList:
             if reading.status == False:
@@ -188,5 +196,5 @@ class ReadsWaterMeter:
         return waterPayConsume
 
 
-    def getReadsWaterMeter(self): #3 item
+    def getReadsWaterMeter(self): # 2 y 3 Item
         return readsWaterMeterList

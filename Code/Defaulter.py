@@ -2,18 +2,18 @@ from Subscriber import Subscriber
 
 class Defaulter(Subscriber):
 
-    def __init__(self, id, fullname, addres, telephone, meterId, debt):
+    def __init__(self, id, fullname, addres, telephone,priceTotal,readingList):
 
         Subscriber.__init__(self, id, fullname, addres, telephone)
 
-        self.__meterId = meterId
-        self.__debt = debt
+        self.__priceTotal = priceTotal
+        self.__readingList = readingList
 
-    def getDebt(self) -> object:
-        return self.__debt
+    def getreadingList(self):
+        return self.__readingList
 
-    def getMeterId(self):
-        return self.__meterId
+    def getpriceTotal(self):
+        return self.__priceTotal
 
-    def setDebt(self, debt: object) -> object:
-        self.__debt = debt
+    def getNumReads(self):
+        return len(self.__readingList)

@@ -17,6 +17,10 @@ class WaterMeter:
                     i.newAmount = newAmount
                     return
 
+       def searchOwner(self,waterMeterID):
+           for waterMeter in waterMeterList:
+               if waterMeter.waterMeterID == waterMeterID:
+                   return waterMeter.OwnerID
 
        def searchWaterMeter(self,waterMeterID):
            for i in waterMeterList:

@@ -324,7 +324,8 @@ def __menuQuerys():
     option = input("Select one option: ")
 
     if option == "1":
-        print(__querys.getListDefaulters(readsWaterMeterList, waterMeterList))
+        result = ReadsWaterMeter.getDelinquentList(None)
+        print(__querys.getListDefaulters(result))
 
 def __menuInspectors():
 
